@@ -1,6 +1,6 @@
 FROM alpine:latest AS bio
 RUN apk update && \
-    apk add --no-cache bash openjdk21 git && mkdir -p /lib64/ /ref/ /script/ /raw_data/ /outdir/ && \
+    apk add --no-cache bash openjdk21 git R && mkdir -p /lib64/ /ref/ /script/ /raw_data/ /outdir/ && \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-2.35-r1.apk && \
     apk add --no-cache --force-overwrite glibc-2.35-r1.apk && \
@@ -10,4 +10,11 @@ RUN apk update && \
 
 FROM bio AS base
 RUN /opt/conda/bin/mamba install --channel conda-forge --channel bioconda --channel defaults fastp cutadapt trimmomatic  \
-    vsearch pear usearch flash pandaseq
+    vsearch pear usearch flash pandaseq blast mafft fasttree megan diamond fastx_toolkit
+RUN /opt/conda/bin/mamba create --name qiime2 --channel conda-forge --channel bioconda --channel defaults qiime2::qiime2
+RUN /opt/conda/bin/mamba create --name mothur --channel conda-forge --channel bioconda --channel defaults mothur
+
+RUN echo "r <- getOption('repos'); r['CRAN'] <- 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/'; options(repos = r);" > ~/.Rprofile
+RUN Rscript -e "install.packages(\"BiocManager\")"
+RUN Rscript -e "BiocManager::install(\"dada2\")"
+RUN Rscript -e "BiocManager::install(\"vegan\")"
