@@ -56,19 +56,19 @@ def run(R1,R2,prefix,outdir):
              f"sequences <- colnames(seqtab_nochim)\n"
              f"abundances <- colSums(seqtab_nochim)\n"
              f"sequence_lengths <- nchar(sequences)\n"
-             #plot sequence length distribution
-                 f"png(\"/outdir/{prefix}.sequence_length_distribution.png\", width = 800, height = 600)\n"
-                 f"hist(sequence_lengths, breaks = 30, col = \"skyblue\", main = \"Sequence Length Distribution\",xlab = \"Sequence Length (bp)\", ylab = \"Frequency\")\n"
-                 f"dev.off()\n"
-             # output fasta sequence and abuncance table
-                 f"library(Biostrings)\n"
-                 f"sequence_names <- paste0(\"ASV_\", seq_along(sequences))\n"
-                 f"seq_abundance_table <- data.frame(name=sequence_names,sequence = sequences, abundance = abundances)\n"
-                 f"seq_abundance_table <- seq_abundance_table[order(-seq_abundance_table$abundance), ]\n"
-                 f"write.csv(seq_abundance_table, \"/outdir/{prefix}.non_chimeric_sequences.csv\", row.names = FALSE)\n"
-                 f"sorted_sequences <- DNAStringSet(seq_abundance_table$sequence)\n"
-                 f"names(sorted_sequences) <- paste0(\">\", seq_abundance_table$name, \" \", seq_abundance_table$abundance)\n"
-                 f"writeXStringSet(sorted_sequences, \"/outdir/{prefix}.non_chimeric_sequences.fasta\")\n"
+         #plot sequence length distribution
+             f"png(\"/outdir/{prefix}.sequence_length_distribution.png\", width = 800, height = 600)\n"
+             f"hist(sequence_lengths, breaks = 30, col = \"skyblue\", main = \"Sequence Length Distribution\",xlab = \"Sequence Length (bp)\", ylab = \"Frequency\")\n"
+             f"dev.off()\n"
+         # output fasta sequence and abuncance table
+             f"library(Biostrings)\n"
+             f"sequence_names <- paste0(\"ASV_\", seq_along(sequences))\n"
+             f"seq_abundance_table <- data.frame(name=sequence_names,sequence = sequences, abundance = abundances)\n"
+             f"seq_abundance_table <- seq_abundance_table[order(-seq_abundance_table$abundance), ]\n"
+             f"write.csv(seq_abundance_table, \"/outdir/{prefix}.non_chimeric_sequences.csv\", row.names = FALSE)\n"
+             f"sorted_sequences <- DNAStringSet(seq_abundance_table$sequence)\n"
+             f"names(sorted_sequences) <- paste0(\">\", seq_abundance_table$name, \" \", seq_abundance_table$abundance)\n"
+             f"writeXStringSet(sorted_sequences, \"/outdir/{prefix}.non_chimeric_sequences.fasta\")\n"
          )
     subprocess.check_call(cmd, shell=True)
 
