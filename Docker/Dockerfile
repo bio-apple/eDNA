@@ -10,11 +10,8 @@ RUN apk update && \
 
 FROM bio AS base
 RUN /opt/conda/bin/mamba install --channel conda-forge --channel bioconda --channel defaults fastp cutadapt trimmomatic  \
-    vsearch pear usearch flash pandaseq blast mafft fasttree megan diamond fastx_toolkit
-RUN /opt/conda/bin/mamba create --name qiime2 --channel conda-forge --channel bioconda --channel defaults qiime2::qiime2
-RUN /opt/conda/bin/mamba create --name mothur --channel conda-forge --channel bioconda --channel defaults mothur
+    vsearch pear usearch flash pandaseq blast mafft fasttree megan diamond fastx_toolkit &&  \
+    /opt/conda/bin/mamba create --name qiime2 --channel conda-forge --channel bioconda --channel defaults qiime2::qiime2 &&  \
+    /opt/conda/bin/mamba create --name mothur --channel conda-forge --channel bioconda --channel defaults mothur
 
-RUN echo "r <- getOption('repos'); r['CRAN'] <- 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/'; options(repos = r);" > ~/.Rprofile
-RUN Rscript -e "install.packages(\"BiocManager\")"
-RUN Rscript -e "BiocManager::install(\"dada2\")"
-RUN Rscript -e "BiocManager::install(\"vegan\")"
+RUN /opt/conda/bin/conda create --name R conda-forge::r-base bioconda::bioconductor-dada2 conda-forge::r-vegan conda-forge::r-ggplot2
