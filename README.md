@@ -11,7 +11,7 @@
 |去噪方法| 		                  不去噪（基于聚类）	|去噪（规则和经验方法）|	去噪（统计模型）|
 
 
-## 构建docker镜像 build docker images
+## 构建docker镜像 Build docker images
 
 
 
@@ -21,7 +21,7 @@
     cd ref/ASV
 
 
-## [reference paper](./paper/)
+## [Reference paper](./paper/)
 
 [Li Z, Zhao W, Jiang Y, et al. New insights into biologic interpretation of bioinformatic pipelines for fish eDNA metabarcoding: A case study in Pearl River estuary[J]. Journal of Environmental Management, 2024, 368: 122136.](https://www.sciencedirect.com/science/article/pii/S0301479724021224)
 
