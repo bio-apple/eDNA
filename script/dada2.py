@@ -25,13 +25,15 @@ def run(R1,R2,prefix,outdir):
         file_name2=R2.split("/")[-1]
         #file_name_ref=ref.split("/")[-1]
         script.write(
+            #input raw data
             f"#!/opt/conda/envs/R/bin/Rscript\n"
             f"library(dada2)\n"
             f"fnFs<-file.path(\"/raw_data/\",\"{file_name1}\")\n"
             f"fnRs<-file.path(\"/raw_data/\",\"{file_name2}\")\n"
+            
+            #Filter and trim用于对数据进行质量过滤，生成更高质量的 FASTQ 文件
             f"filtFs<-file.path(\"/outdir/\",\"{prefix}_F_filt.fastq.gz\")\n"
             f"filtRs<-file.path(\"/outdir/\",\"{prefix}_R_filt.fastq.gz\")\n"
-            #Filter and trim用于对数据进行质量过滤，生成更高质量的 FASTQ 文件
             f"out<-filterAndTrim(fnFs,filtFs, fnRs,filtRs,maxN=0,maxEE=c(2,2),truncQ=2,rm.phix=TRUE,compress=TRUE,multithread=TRUE)\n"
             
             #Learn the Error Rates通过训练数据学习测序误差模型
