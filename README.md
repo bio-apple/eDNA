@@ -11,9 +11,10 @@
 |去噪方法| 		                  不去噪（基于聚类）	| 去噪（规则和经验方法）       |	去噪（统计模型）|
 
 
-## 构建docker镜像 Build docker images
+## 构建docker镜像 [Build docker images](./Docker)
 
-
+    cd Docker/
+    docker build -t edna ./
 
 ## 构建数据库Build database
 
