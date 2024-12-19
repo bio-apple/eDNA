@@ -16,7 +16,7 @@
     cd Docker/
     docker build -t edna ./
 
-## 构建数据库Build database
+## 构建数据库[Build database](./ref/)
 
     mkdir -p ref/ASV
     cd ref/ASV
