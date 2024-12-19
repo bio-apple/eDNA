@@ -71,7 +71,7 @@ def run(R1,R2,prefix,outdir):
                              f"writeXStringSet(sorted_sequences, \"/outdir/{prefix}.non_chimeric_sequences.fasta\")\n"
                      )
         print(cmd)
-        subprocess.check_call(cmd, shell=True)
+    subprocess.check_call(cmd, shell=True)
 
 
 
