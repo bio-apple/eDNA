@@ -12,14 +12,14 @@ def run(R1,R2,prefix,outdir,ref,type):
     R2=os.path.abspath(R2)
     raw_data=os.path.dirname(R1)
     outdir=os.path.abspath(outdir)
-    ref=os.path.abspath(ref)
+    ref=os.path.abspath(ref)+f"/{type}/"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     if raw_data!=os.path.dirname(R2):
         print("R1 and R2 fastq file must be in the same directory")
         exit(1)
 
-    cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ -v {os.path.dirname(ref)}:/ref/"
+    cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ -v {os.path.dirname(ref)}:/ref/ "
          f"{docker} sh -c \'cd /outdir/ && /opt/conda/envs/R/bin/Rscript /outdir/{prefix}.Rscript\'")
     with open(f"{outdir}/{prefix}.Rscript","w") as script:
         file_name1=R1.split("/")[-1]
@@ -67,6 +67,13 @@ def run(R1,R2,prefix,outdir,ref,type):
             f"abundances <- colSums(seqtab_nochim)\n"
             f"sequence_lengths <- nchar(sequences)\n"
             
+            #Track reads through the pipeline
+            f"getN <- function(x) sum(getUniques(x))\n"
+            f"track <- cbind(out, getN(dadaFs), getN(dadaRs), getN(mergers), rowSums(seqtab_nochim))\n"
+            f"colnames(track) <- c(\"input\", \"filtered\", \"denoisedF\", \"denoisedR\", \"merged\", \"nonchim\")\nrownames(track) <- \"{prefix}\"\n"
+            f"track_df <- as.data.frame(track)\n"
+            f"write.csv(track_df, file = \"/outdir/{prefix}.track_reads_through_pipeline.csv\", row.names = TRUE, quote = FALSE)\n"
+            
             #plot sequence length distribution
             f"png(\"/outdir/{prefix}.sequence_length_distribution.png\", width = 800, height = 600)\n"
             f"hist(sequence_lengths, breaks = 30, col = \"skyblue\", main = \"Sequence Length Distribution\",xlab = \"Sequence Length (bp)\", ylab = \"Frequency\")\n"
@@ -81,6 +88,8 @@ def run(R1,R2,prefix,outdir,ref,type):
             f"sorted_sequences <- DNAStringSet(seq_abundance_table$sequence)\n"
             f"names(sorted_sequences) <- paste0(\">\", seq_abundance_table$name, \" \", seq_abundance_table$abundance)\n"
             f"writeXStringSet(sorted_sequences, \"/outdir/{prefix}.non_chimeric_sequences.fasta\")\n"
+            
+
          )
     subprocess.check_call(cmd, shell=True)
 
@@ -96,4 +105,4 @@ if __name__ == "__main__":
     parser.add_argument("-t","--type",required=True,choices=["16s","18s","ITS"],help="type of sample")
     parser.add_argument("-r","--ref",required=True,help="reference fasta")
     args = parser.parse_args()
-    run(args.pe1,args.pe2,args.prefix,args.outdir)
+    run(args.pe1,args.pe2,args.prefix,args.outdir,args.ref,args.type)
