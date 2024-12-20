@@ -7,22 +7,24 @@ import re
 
 docker="edna:latest"
 
-def run(R1,R2,prefix,outdir):
+def run(R1,R2,prefix,outdir,ref,type):
     R1=os.path.abspath(R1)
     R2=os.path.abspath(R2)
     raw_data=os.path.dirname(R1)
     outdir=os.path.abspath(outdir)
+    ref=os.path.abspath(ref)
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     if raw_data!=os.path.dirname(R2):
         print("R1 and R2 fastq file must be in the same directory")
         exit(1)
 
-    cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ "
+    cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ -v {os.path.dirname(ref)}:/ref/"
          f"{docker} sh -c \'cd /outdir/ && /opt/conda/envs/R/bin/Rscript /outdir/{prefix}.Rscript\'")
     with open(f"{outdir}/{prefix}.Rscript","w") as script:
         file_name1=R1.split("/")[-1]
         file_name2=R2.split("/")[-1]
+
         #file_name_ref=ref.split("/")[-1]
         script.write(
             #input raw data
@@ -91,5 +93,7 @@ if __name__ == "__main__":
     parser.add_argument("-p2", "--pe2", required=True, help="R2 fastq.gz")
     parser.add_argument("-p", "--prefix", required=True, help="prefix of output files")
     parser.add_argument("-o", "--outdir", required=True, help="output directory")
+    parser.add_argument("-t","--type",required=True,choices=["16s","18s","ITS"],help="type of sample")
+    parser.add_argument("-r","--ref",required=True,help="reference fasta")
     args = parser.parse_args()
     run(args.pe1,args.pe2,args.prefix,args.outdir)
