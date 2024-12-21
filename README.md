@@ -10,7 +10,7 @@
 |常用工具| 		                 VSEARCH、USEARCH、Mothur| 	UNOISE3（USEARCH） |	DADA2、Deblur、QIIME 2|
 |去噪方法| 		                  不去噪（基于聚类）	| 去噪（规则和经验方法）       |	去噪（统计模型）|
 
-Operational Taxonomic Units**:**OTUs**
+Operational Taxonomic Units:**OTUs**
 
 Amplicon Sequence Variants:**ASVs**, also known as Exact Sequence Variants **(ESVs)**
 
