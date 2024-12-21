@@ -1,5 +1,5 @@
-#Email:yucai.fan@illumina.com
-
+# Email:yucai.fan@illumina.com
+# 2024.12.19-
 import os
 import subprocess
 import argparse
@@ -13,6 +13,12 @@ def run(R1,R2,prefix,outdir,ref,type):
     raw_data=os.path.dirname(R1)
     outdir=os.path.abspath(outdir)
     ref=os.path.abspath(ref)+f"/{type}/"
+    train,test="",""
+    for i in os.listdir(ref):
+        if i.endswith("toGenus_trainset.fa.gz"):
+            train = i
+        if i.endswith("assignSpecies.fa.gz"):
+            test = i
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     if raw_data!=os.path.dirname(R2):
@@ -24,14 +30,20 @@ def run(R1,R2,prefix,outdir,ref,type):
     with open(f"{outdir}/{prefix}.Rscript","w") as script:
         file_name1=R1.split("/")[-1]
         file_name2=R2.split("/")[-1]
-
-        #file_name_ref=ref.split("/")[-1]
         script.write(
             #input raw data
             f"#!/opt/conda/envs/R/bin/Rscript\n"
             f"library(dada2)\n"
             f"fnFs<-file.path(\"/raw_data/\",\"{file_name1}\")\n"
             f"fnRs<-file.path(\"/raw_data/\",\"{file_name2}\")\n"
+            
+            #Plot quality profile of a fastq file
+            f"png(filename=\"/outdir/{prefix}.R1.png\",res=200,height = 1000,width=2000)\n"
+            f"plotQualityProfile(fnFs)\n"
+            f"dev.off()"
+            f"png(filename=\"/outdir/{prefix}.R2.png\",res=200,height = 1000,width=2000)\n"
+            f"plotQualityProfile(fnRs)\n"
+            f"dev.off()"
             
             #Filter and trim用于对数据进行质量过滤，生成更高质量的 FASTQ 文件
             f"filtFs<-file.path(\"/outdir/\",\"{prefix}_F_filt.fastq.gz\")\n"
@@ -49,48 +61,35 @@ def run(R1,R2,prefix,outdir,ref,type):
             f"dev.off()\n"
             
             #dereplicating amplicon sequences去重 
-            f"derep_forward <- derepFastq(filtFs)\nderep_reverse <- derepFastq(filtRs)\n"
+            f"derep_forward <- derepFastq(filtFs)\n"
+            f"derep_reverse <- derepFastq(filtRs)\n"
             
             #Sample Inference(apply the core sample inference algorithm to the filtered and trimmed sequence data.)去噪
             f"dadaFs <- dada(derep_forward, err=errF, multithread=TRUE)\n"
             f"dadaRs <- dada(derep_reverse, err=errR, multithread=TRUE)\n"
             
             #Merge paired reads
-            f"mergers <- mergePairs(dadaFs, derep_forward, dadaRs, derep_reverse, verbose=TRUE)\n"
+            f"mergers <- mergePairs(dadaFs, derep_forward, dadaRs, derep_reverse, verbose=TRUE,minOverlap = 10)\n"
             
             #Construct sequence table
             f"seqtab <- makeSequenceTable(mergers)\n"
             
             #Remove chimeras
-            f"seqtab_nochim <- removeBimeraDenovo(seqtab, method=\"consensus\", multithread=TRUE, verbose=TRUE)\n"
-            f"sequences <- colnames(seqtab_nochim)\n"
-            f"abundances <- colSums(seqtab_nochim)\n"
-            f"sequence_lengths <- nchar(sequences)\n"
+            f"seqtab.nochim <- removeBimeraDenovo(seqtab, method=\"consensus\", multithread=TRUE, verbose=TRUE)\n"
+            f"write.csv(t(seqtab.nochim), file = \"/outdir/{prefix}.seqtab.nochim.csv\", row.names = TRUE)\n"
+            
+            #Assign taxonomy
+            f"taxa <- assignTaxonomy(seqtab.nochim, \"/ref/{train}\", multithread=TRUE)\n"
+            f"taxa <- addSpecies(taxa, \"/ref/{test}\")\n"
+            f"write.csv(taxa, file = \"/outdir/{prefix}.tax.csv\",row.name=TRUE)\n"
             
             #Track reads through the pipeline
             f"getN <- function(x) sum(getUniques(x))\n"
-            f"track <- cbind(out, getN(dadaFs), getN(dadaRs), getN(mergers), rowSums(seqtab_nochim))\n"
+            f"track <- cbind(out, getN(dadaFs), getN(dadaRs), getN(mergers), rowSums(seqtab.nochim))\n"
             f"colnames(track) <- c(\"input\", \"filtered\", \"denoisedF\", \"denoisedR\", \"merged\", \"nonchim\")\nrownames(track) <- \"{prefix}\"\n"
             f"track_df <- as.data.frame(track)\n"
             f"write.csv(track_df, file = \"/outdir/{prefix}.track_reads_through_pipeline.csv\", row.names = TRUE, quote = FALSE)\n"
-            
-            #plot sequence length distribution
-            f"png(\"/outdir/{prefix}.sequence_length_distribution.png\", width = 800, height = 600)\n"
-            f"hist(sequence_lengths, breaks = 30, col = \"skyblue\", main = \"Sequence Length Distribution\",xlab = \"Sequence Length (bp)\", ylab = \"Frequency\")\n"
-            f"dev.off()\n"
-            
-            #output fasta sequence and abuncance table
-            f"library(Biostrings)\n"
-            f"sequence_names <- paste0(\"ASV_\", seq_along(sequences))\n"
-            f"seq_abundance_table <- data.frame(name=sequence_names,sequence = sequences, abundance = abundances)\n"
-            f"seq_abundance_table <- seq_abundance_table[order(-seq_abundance_table$abundance), ]\n"
-            f"write.csv(seq_abundance_table, \"/outdir/{prefix}.non_chimeric_sequences.csv\", row.names = FALSE)\n"
-            f"sorted_sequences <- DNAStringSet(seq_abundance_table$sequence)\n"
-            f"names(sorted_sequences) <- paste0(\">\", seq_abundance_table$name, \" \", seq_abundance_table$abundance)\n"
-            f"writeXStringSet(sorted_sequences, \"/outdir/{prefix}.non_chimeric_sequences.fasta\")\n"
-            
-
-         )
+        )
     subprocess.check_call(cmd, shell=True)
 
 
