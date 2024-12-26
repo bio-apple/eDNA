@@ -6,11 +6,11 @@ RUN apk update && \
     apk add --no-cache --force-overwrite glibc-2.35-r1.apk && \
     rm glibc-2.35-r1.apk && ln -s /usr/glibc-compat/lib/* /lib64/ && \
     wget -q -O /opt/Miniforge3-Linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
-    bash /opt/Miniforge3-Linux-x86_64.sh -f -b -p /opt/conda/ && rm -rf /opt/Miniforge3-Linux-x86_64.sh /var/cache/apk/* &&  \
-    /opt/conda/bin/mamba create --name crabs --channel conda-forge --channel bioconda --channel defaults crabs && \
-    /opt/conda/bin/mamba create --name qiime2 --channel conda-forge --channel bioconda --channel defaults qiime2  && \
-    /opt/conda/bin/mamba create --name mothur --channel conda-forge --channel bioconda --channel defaults mothur && \
-    /opt/conda/bin/mamba install --channel conda-forge --channel bioconda --channel defaults fastp cutadapt trimmomatic  \
-    vsearch pear usearch flash pandaseq blast mafft fasttree megan diamond fastx_toolkit scikit-bio obitools &&  \
-    /opt/conda/bin/conda create --name R conda-forge::r-base bioconda::bioconductor-dada2 conda-forge::r-vegan conda-forge::r-ggplot2 conda-forge::r-dplyr  \
-    bioconda::bioconductor-phyloseq bioconda::bioconductor-decipher
+    bash /opt/Miniforge3-Linux-x86_64.sh -f -b -p /opt/conda/ && rm -rf /opt/Miniforge3-Linux-x86_64.sh /var/cache/apk/*
+FROM bio as base
+RUN /opt/conda/bin/mamba create --name qiime2 --channel qiime2 qiime2  && \
+/opt/conda/bin/mamba create --name mothur --channel conda-forge --channel bioconda --channel defaults mothur && \
+/opt/conda/bin/mamba install --channel conda-forge --channel bioconda --channel defaults fastp cutadapt trimmomatic  \
+vsearch pear usearch flash pandaseq blast mafft fasttree megan diamond fastx_toolkit scikit-bio  &&  \
+/opt/conda/bin/conda create --name R conda-forge::r-base bioconda::bioconductor-dada2 conda-forge::r-vegan conda-forge::r-ggplot2 conda-forge::r-dplyr  \
+bioconda::bioconductor-phyloseq bioconda::bioconductor-decipher

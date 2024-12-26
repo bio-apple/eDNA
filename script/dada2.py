@@ -7,7 +7,7 @@ import re
 
 docker="edna:latest"
 
-def run(R1,R2,prefix,outdir,ref,type):
+def run(R1,R2,prefix,outdir,ref,type,primer,name):
     R1=os.path.abspath(R1)
     R2=os.path.abspath(R2)
     raw_data=os.path.dirname(R1)
@@ -24,6 +24,13 @@ def run(R1,R2,prefix,outdir,ref,type):
     if raw_data!=os.path.dirname(R2):
         print("R1 and R2 fastq file must be in the same directory")
         exit(1)
+    left,right=0,0
+    with open(os.path.abspath(primer),"r") as in_file:
+        for line in in_file:
+            line=line.strip()
+            if name==line.split(",")[0]:
+                left=line.split(",")[2]
+                right=line.split(",")[4]
 
     cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ -v {os.path.dirname(ref)}:/ref/ "
          f"{docker} sh -c \'cd /outdir/ && /opt/conda/envs/R/bin/Rscript /outdir/{prefix}.Rscript\'")
@@ -48,7 +55,7 @@ def run(R1,R2,prefix,outdir,ref,type):
             #Filter and trim用于对数据进行质量过滤，生成更高质量的 FASTQ 文件
             f"filtFs<-file.path(\"/outdir/\",\"{prefix}_F_filt.fastq.gz\")\n"
             f"filtRs<-file.path(\"/outdir/\",\"{prefix}_R_filt.fastq.gz\")\n"
-            f"out<-filterAndTrim(fnFs,filtFs, fnRs,filtRs,maxN=0,maxEE=c(2,2),truncQ=2,rm.phix=TRUE,compress=TRUE,multithread=TRUE)\n"
+            f"out<-filterAndTrim(fnFs,filtFs, fnRs,filtRs,maxN=0,trimLeft=c({left}, {right}),maxEE=c(2,2),truncQ=2,rm.phix=TRUE,compress=TRUE,multithread=TRUE)\n"
             
             #Learn the Error Rates通过训练数据学习测序误差模型
             f"errF=learnErrors(filtFs, multithread=TRUE)\n"
@@ -103,5 +110,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--outdir", required=True, help="output directory")
     parser.add_argument("-t","--type",required=True,choices=["16s","18s","ITS"],help="type of sample")
     parser.add_argument("-r","--ref",required=True,help="reference fasta")
+    parser.add_argument("-p","--primer",required=True,help="primer file",require=True)
+    parser.add_argument("-n","--name",required=True,help="primer name",require=True)
     args = parser.parse_args()
-    run(args.pe1,args.pe2,args.prefix,args.outdir,args.ref,args.type)
+    run(args.pe1,args.pe2,args.prefix,args.outdir,args.ref,args.type,args.primer,args.name)
