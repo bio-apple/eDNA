@@ -19,7 +19,7 @@ def reverse_complement_sequence(seq):
     return ''.join(complement[base] for base in seq.upper())[::-1]
 
 def run(R1, R2,primer,name,prefix,outdir,read,amplicon):
-    cmd = f"docker run -v {os.path.dirname(R1)}:/raw_data -v {os.path.dirname(primer)}:/ref/ -v {outdir}:/outdir/ {docker} sh -c \'"
+    cmd = f"docker run -v {os.path.dirname(R1)}:/raw_data -v {os.path.dirname(primer)}:/ref/ -v {outdir}:/outdir/ {docker} sh -c \'export PATH=/opt/conda/bin/:$PATH && "
     R1=os.path.abspath(R1)
     primer=os.path.abspath(primer)
     outdir=os.path.abspath(outdir)
@@ -41,19 +41,20 @@ def run(R1, R2,primer,name,prefix,outdir,read,amplicon):
             exit(1)
         else:
             # --max-n 2 Discard reads with more than COUNT 'N' bases.
+            # default:-e 0.1 mismatch
             if read < amplicon:
                 #reads are shorter than the amplicon
                 #https://sunagawalab.ethz.ch/share/teaching/home/551-1119-00L_Fall2020/documentation/1.5.dada2_pipeline.html
-                cmd+=f"cutadapt -j 16 --max-n 2 -g {forward} -G {reverse} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
+                cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -G {reverse} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
             else:
                 #reads can be longer than the amplicon
                 #https://www.nemabiome.ca/dada2_workflow
                 #https://github.com/thierroll/dada2_custom_fungal/blob/main/preparation_from_raw_reads.R
-                cmd+=f"cutadapt -j 16 --max-n 2 -g {forward} -G {reverse} -a {reverse_forward_c} -A {forward_rev_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
+                cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -G {reverse} -a {reverse_forward_c} -A {forward_rev_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
     else:
         # single read
         if read > amplicon:
-            cmd+=f"cutadapt -j 16 --max-n 2 -g {forward} -a {reverse_forward_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz /raw_data/{R1.split('/')[-1]}\'"
+            cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -a {reverse_forward_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz /raw_data/{R1.split('/')[-1]}\'"
     print(cmd)
     subprocess.check_call(cmd, shell=True)
 
