@@ -37,6 +37,7 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 ## 12s
 
 12S-V5-F (5′-ACTGGGATTAGATACCCC-3′)
+
 12S-V5-R (5′-TAGAACAGGCTCCTCTAG-3′)
 
 [Blabolil P, Harper L R, Říčanová Š, et al. Environmental DNA metabarcoding uncovers environmental correlates of fish communities in spatially heterogeneous freshwater habitats[J]. Ecological Indicators, 2021, 126: 107698.](https://www.sciencedirect.com/science/article/pii/S1470160X21003630)
@@ -45,7 +46,9 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 ## CO1
 
+![CO1](./CO1/CO1.png)
 
+[Hajibabaei M, Porter T M, Wright M, et al. COI metabarcoding primer choice affects richness and recovery of indicator taxa in freshwater systems[J]. PLoS One, 2019, 14(9): e0220953.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0220953)
 
 ## [Earth Microbiome Project](https://earthmicrobiome.org/) 
 
