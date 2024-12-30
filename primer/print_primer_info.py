@@ -10,7 +10,7 @@ with open("primer.tsv", "w") as primer_tsv:
                      "https://github.com/billzt/MiFish,Miya M, Sato Y, Fukunaga T, et al. MiFish, a set of universal PCR primers for metabarcoding environmental DNA from fishes: detection of more than 230 subtropical marine species[J]. Royal Society open science, 2015, 2(7): 150088.\n"
                      )
 
-    primer_tsv.write("12s_rRNA_V5\t"
+    primer_tsv.write("12s_rRNA_V5_Riaz\t"
                      "ACTGGGATTAGATACCCC\t"
                      "TAGAACAGGCTCCTCTAG\t"
                      "117\t"
