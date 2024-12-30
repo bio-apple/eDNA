@@ -40,7 +40,9 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 12S-V5-R (5′-TAGAACAGGCTCCTCTAG-3′)
 
-![12s](./12s/12s_v5.jpg)
+![12s_v5](./12s/12s_v5.jpg)
+
+![12s_teleo](./12s/Schematic-representation-of-a-the-mitochondrial-mitogenome-with-the-12S-mitochondrial.png)
 
 [Blabolil P, Harper L R, Říčanová Š, et al. Environmental DNA metabarcoding uncovers environmental correlates of fish communities in spatially heterogeneous freshwater habitats[J]. Ecological Indicators, 2021, 126: 107698.](https://www.sciencedirect.com/science/article/pii/S1470160X21003630)
 
