@@ -61,19 +61,19 @@ with open("primer.tsv", "w") as primer_tsv:
                      "470\t"
                      "Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.\n")
 
-    primer_tsv.write("16s_rRNA_V4-V5_515F–944R\t"
+    primer_tsv.write("16s_rRNA_V4-V5_515F-944R\t"
                      "GTGYCAGCMGCCGCGGTAA\t"#515F
                      "CCGYCAATTYMTTTRAGTTT\t"#944R
                      "430\t"
                      "Fadeev E, Cardozo-Mino M G, Rapp J Z, et al. Comparison of two 16S rRNA primers (V3–V4 and V4–V5) for studies of arctic microbial communities[J]. Frontiers in microbiology, 2021, 12: 637526.\n")
 
-    primer_tsv.write("16s_rRNA_V4_515F–806R\t"
+    primer_tsv.write("16s_rRNA_V4_515F-806R\t"
                      "GTGYCAGCMGCCGCGGTAA\t"#515F
                      "GGACTACNVGGGTWTCTAAT\t"#806R
                      "253\t"
                      "https://earthmicrobiome.org/protocols-and-standards/16s/,Zhao J, Rodriguez J, Martens-Habbena W. Fine-scale evaluation of two standard 16S rRNA gene amplicon primer pairs for analysis of total prokaryotes and archaeal nitrifiers in differently managed soils[J]. Frontiers in Microbiology, 2023, 14: 1140487.\n")
 
-    primer_tsv.write("16s_rRNA_V4-V5_515F–926R\t"
+    primer_tsv.write("16s_rRNA_V4-V5_515F-926R\t"
                      "GTGYCAGCMGCCGCGGTAA\t"#515F
                      "CCGYCAATTYMTTTRAGTTT\t"#926R
                      "374\t"
