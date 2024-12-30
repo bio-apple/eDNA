@@ -46,6 +46,12 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 5′-TAGAACAGGCTCCTCTAG-3′
 
+**teleo:F/R**
+
+5′-ACACCGCCCGTCACTCT-3′
+
+5′-CTTCCGGTACACTTACCATG-3′
+
 **Tele02:F/R**
 
 5′-AAACTCGTGCCAGCCACC-3′
