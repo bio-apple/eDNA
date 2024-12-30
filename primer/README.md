@@ -1,6 +1,6 @@
 # Observing_Life_in_the Sea_Using_Environmental_DNA
 
-![Observing Life in the Sea Using Environmental DNA](./Observing_Life_in_the Sea_Using_Environmental_DNA.jpg)
+![Observing Life in the Sea Using Environmental DNA](./Observing_Life_in_the_Sea_Using_Environmental_DNA.jpg)
 
 ## ITS region
 
