@@ -42,19 +42,20 @@ def run(R1, R2,primer,name,prefix,outdir,read,amplicon):
         else:
             # --max-n 2 Discard reads with more than COUNT 'N' bases.
             # default:-e 0.1 mismatch
+            # --match-read-wildcards https://github.com/ycl6/16S-rDNA-V3-V4/blob/master/run_trimming.pl
             if read < amplicon:
                 #reads are shorter than the amplicon
                 #https://sunagawalab.ethz.ch/share/teaching/home/551-1119-00L_Fall2020/documentation/1.5.dada2_pipeline.html
-                cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -G {reverse} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
+                cmd+=f"cutadapt -j 16 --match-read-wildcards --max-n 2 -q 20 -g {forward} -G {reverse} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
             else:
                 #reads can be longer than the amplicon
                 #https://www.nemabiome.ca/dada2_workflow
                 #https://github.com/thierroll/dada2_custom_fungal/blob/main/preparation_from_raw_reads.R
-                cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -G {reverse} -a {reverse_forward_c} -A {forward_rev_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
+                cmd+=f"cutadapt -j 16 --match-read-wildcards --max-n 2 -q 20 -g {forward} -G {reverse} -a {reverse_forward_c} -A {forward_rev_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz -p {prefix}_no_primer_R2.fastq.gz /raw_data/{R1.split('/')[-1]} /raw_data/{R1.split('/')[-2]}\'"
     else:
         # single read
         if read > amplicon:
-            cmd+=f"cutadapt -j 16 --max-n 2 -q 20 -g {forward} -a {reverse_forward_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz /raw_data/{R1.split('/')[-1]}\'"
+            cmd+=f"cutadapt -j 16 --match-read-wildcards --max-n 2 -q 20 -g {forward} -a {reverse_forward_c} --report=full --discard-untrimmed -o /outdir/{prefix}_no_primer_R1.fastq.gz /raw_data/{R1.split('/')[-1]}\'"
     print(cmd)
     subprocess.check_call(cmd, shell=True)
 

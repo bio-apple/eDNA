@@ -4,11 +4,6 @@ import argparse
 import json
 
 docker="edna:latest"
-#     remove adaptors
-#     quality filtering of reads
-#     removal of low-quality reads(q < 20)
-#     removal of short reads ( < 36 bp)
-#     deduplication for FASTQ data
 def run(pe1,outdir,prefix,pe2=None):
     pe1 = os.path.abspath(pe1)
     in_dir = os.path.dirname(pe1)
@@ -34,7 +29,7 @@ def run(pe1,outdir,prefix,pe2=None):
     subprocess.check_call(cmd, shell=True)
     out=outdir+'/'+prefix
     outfile = open("%s.fastp.tsv" % (out), "w")
-    outfile.write("SampleID\tTotal_reads(Raw)\tTotal_bases(Raw)\tQ20_rate(Raw)\tQ30_rate(Raw)\tGC_content(Raw)\tTotal_reads(clean)\tTotal_bases(clean)\tQ20_rate(clean)\tQ30_rate(clean)\tGC_content(clean)\n")
+    outfile.write("SampleID\tRaw_reads(bp)\tRaw_bases(bp)\tQ20_rate(%)\tQ30_rate(%)\tGC_content(%)\tClean_reads(bp)\tClean_bases(bp)\tQ20_rate(%)\tQ30_rate(%)\tGC_content(%s)\n")
     with open("%s.fastp.json"%out, "r") as load_f:
         load_dict = json.load(load_f)
         outfile.write("%s\t" % (prefix))
