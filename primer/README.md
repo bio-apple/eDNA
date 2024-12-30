@@ -36,11 +36,14 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 ## 12s
 
-12S-V5-F (5′-ACTGGGATTAGATACCCC-3′)
+
+12S-V5-F(also names:Riaz) (5′-ACTGGGATTAGATACCCC-3′)
 
 12S-V5-R (5′-TAGAACAGGCTCCTCTAG-3′)
 
-![12s_v5](./12s/12s_v5.jpg)
+![12s_v5](./12s/12s_RiazV5_MiFish_Tele02.png)
+
+
 
 ![12s_teleo](./12s/Schematic-representation-of-a-the-mitochondrial-mitogenome-with-the-12S-mitochondrial.png)
 
