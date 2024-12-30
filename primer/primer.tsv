@@ -1,22 +1,22 @@
-Name	Forward	Reverse	Amplicon_max_Length(bp)	Notes
-12s_rRNA_MiFish-U_MiFish-L	GTCGGTAAAACTCGTGCCAGC	CATAGTGGGGTATCTAATCCCAGTTTG	185	https://github.com/billzt/MiFish,Miya M, Sato Y, Fukunaga T, et al. MiFish, a set of universal PCR primers for metabarcoding environmental DNA from fishes: detection of more than 230 subtropical marine species[J]. Royal Society open science, 2015, 2(7): 150088.
-12s_rRNA_V5_Riaz	ACTGGGATTAGATACCCC	TAGAACAGGCTCCTCTAG	117	Oliveira Carvalho C, Pazirgiannidi M, Ravelomanana T, et al. Multi-method survey rediscovers critically endangered species and strengthens Madagascar's freshwater fish conservation[J]. Scientific Reports, 2024, 14(1): 20427.](https://www.nature.com/articles/s41598-024-71398-z.
-12s_rRNA_Tele02	AAACTCGTGCCAGCCACC	GGGTATCTAATCCCAGTTTG	209	Oliveira Carvalho C, Pazirgiannidi M, Ravelomanana T, et al. Multi-method survey rediscovers critically endangered species and strengthens Madagascar's freshwater fish conservation[J]. Scientific Reports, 2024, 14(1): 20427.](https://www.nature.com/articles/s41598-024-71398-z)
-Fish_16s_rRNA_F/D_16S2R	GACCCTATGGAGCTTTAGAC	CGCTGTTATCCCTADRGTAATC	200	Adams C I M, Jeunen G J, Cross H, et al. Environmental DNA metabarcoding describes biodiversity across marine gradients[J]. ICES Journal of Marine Science, 2023, 80(4): 953-971.
-Crustacean_Crust16S_F_Crust16S_R	GGGACGATAAGACCCTATA	ATTACGCTGTTATCCCTAAAG	200	Adams C I M, Jeunen G J, Cross H, et al. Environmental DNA metabarcoding describes biodiversity across marine gradients[J]. ICES Journal of Marine Science, 2023, 80(4): 953-971.
-16s_rRNA_V1-V2_27F-338R	AGAGTTTGATYMTGGCTCAG	TGCTGCCTCCCGTAGRAGT	311	Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.
-16s_rRNA_V1-V3_27F-534R	AGAGTTTGATYMTGGCTCAG	ATTACCGCGGCTGCTGG	500	Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.
-16s_rRNA_V3-v4_341F-785R	CCTACGGGNGGCWGCAG	GACTACHVGGGTATCTAATCC	470	Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.
-16s_rRNA_V3-v4_341F-805R	CCTACGGGNBGCASCAG	GACTACNVGGGTATCTAATCC	470	Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.
-16s_rRNA_V4-V5_515F–944R	GTGYCAGCMGCCGCGGTAA	CCGYCAATTYMTTTRAGTTT	430	Fadeev E, Cardozo-Mino M G, Rapp J Z, et al. Comparison of two 16S rRNA primers (V3–V4 and V4–V5) for studies of arctic microbial communities[J]. Frontiers in microbiology, 2021, 12: 637526.
-16s_rRNA_V4_515F–806R	GTGYCAGCMGCCGCGGTAA	GGACTACNVGGGTWTCTAAT	253	https://earthmicrobiome.org/protocols-and-standards/16s/,Zhao J, Rodriguez J, Martens-Habbena W. Fine-scale evaluation of two standard 16S rRNA gene amplicon primer pairs for analysis of total prokaryotes and archaeal nitrifiers in differently managed soils[J]. Frontiers in Microbiology, 2023, 14: 1140487.
-16s_rRNA_V4-V5_515F–926R	GTGYCAGCMGCCGCGGTAA	CCGYCAATTYMTTTRAGTTT	374	https://earthmicrobiome.org/protocols-and-standards/16s/,Zhao J, Rodriguez J, Martens-Habbena W. Fine-scale evaluation of two standard 16S rRNA gene amplicon primer pairs for analysis of total prokaryotes and archaeal nitrifiers in differently managed soils[J]. Frontiers in Microbiology, 2023, 14: 1140487.
-ITS1_ITS1F-ITS2	CTTGGTCATTTAGAGGAAGTAA	GCTGCGTTCTTCATCGATGC	300	https://earthmicrobiome.org/protocols-and-standards/its/,Op De Beeck M, Lievens B, Busschaert P, et al. Comparison and validation of some ITS primer pairs useful for fungal metabarcoding studies[J]. PloS one, 2014, 9(6): e97629.
-ITS1_ITS1F-ITS86R	CTTGGTCATTTAGAGGAAGTAA	TTCAAAGATTCGATGATTCAG	300	https://earthmicrobiome.org/protocols-and-standards/its/,Op De Beeck M, Lievens B, Busschaert P, et al. Comparison and validation of some ITS primer pairs useful for fungal metabarcoding studies[J]. PloS one, 2014, 9(6): e97629.
-ITS2_ITS3-ITS4	GCATCGATGAAGAACGCAGC	TCCTCCGCTTATTGATATGC	450	Vancov T, Keen B. Amplification of soil fungal community DNA using the ITS86F and ITS4 primers[J]. FEMS microbiology letters, 2009, 296(1): 91-96.
-ITS2_ITS7-ITS4	GTGARTCATCGARTCTTTG	TCCTCCGCTTATTGATATGC	400	Op De Beeck M, Lievens B, Busschaert P, et al. Comparison and validation of some ITS primer pairs useful for fungal metabarcoding studies[J]. PloS one, 2014, 9(6): e97629.
-ITS2_ITS86F-ITS4	GTGAATCATCGAATCTTTGAA	TCCTCCGCTTATTGATATGC	450	Vancov T, Keen B. Amplification of soil fungal community DNA using the ITS86F and ITS4 primers[J]. FEMS microbiology letters, 2009, 296(1): 91-96.
-18s_rRNA_V4_TAReuk454FWD1-TAReukREV3	GTGAATCATCGAATCTTTGAA	ACTTTCGTTCTTGATYRATGA	420	Chun S J. Microbiome dataset of eukaryotic and fungal communities in the bulk soil and root of wild Brassica napus in South Korea[J]. Data in Brief, 2022, 43: 108457.
-18s_rRNA_V9_1380F-1510R	CCCTGCCHTTTGTACACAC	CCTTCYGCAGGTTCACCTAC	130	Zheng X, He Z, Wang C, et al. Evaluation of different primers of the 18S rRNA gene to profile amoeba communities in environmental samples[J]. Water Biology and Security, 2022, 1(3): 100057.
-18s_rRNA_V9_1391F-EukBr	GTACACACCGCCCGTC	TGATCCTTCTGCAGGTTCACCTAC	130	https://earthmicrobiome.org/protocols-and-standards/18s/.
-CO1_mlCOIintF-dgHCO2198	GGWACWGGWTGAACWGTWTAYCCYCC	TAAACTTCAGGGTGACCAAARAAYCA	313	https://naturalhistory.si.edu/sites/default/files/media/file/arms-12coimetabarcoding.pdf
+Name	Forward	Reverse	Amplicon_max_Length(bp)
+12s_rRNA_MiFish-U_MiFish-L	GTCGGTAAAACTCGTGCCAGC	CATAGTGGGGTATCTAATCCCAGTTTG	185
+12s_rRNA_V5_Riaz	ACTGGGATTAGATACCCC	TAGAACAGGCTCCTCTAG	117
+12s_rRNA_Tele02	AAACTCGTGCCAGCCACC	GGGTATCTAATCCCAGTTTG	209
+Fish_16s_rRNA_F/D_16S2R	GACCCTATGGAGCTTTAGAC	CGCTGTTATCCCTADRGTAATC	200
+Crustacean_Crust16S_F_Crust16S_R	GGGACGATAAGACCCTATA	ATTACGCTGTTATCCCTAAAG	200
+16s_rRNA_V1-V2_27F-338R	AGAGTTTGATYMTGGCTCAG	TGCTGCCTCCCGTAGRAGT	311
+16s_rRNA_V1-V3_27F-534R	AGAGTTTGATYMTGGCTCAG	ATTACCGCGGCTGCTGG	500
+16s_rRNA_V3-v4_341F-785R	CCTACGGGNGGCWGCAG	GACTACHVGGGTATCTAATCC	470
+16s_rRNA_V3-v4_341F-805R	CCTACGGGNBGCASCAG	GACTACNVGGGTATCTAATCC	470
+16s_rRNA_V4-V5_515F-944R	GTGYCAGCMGCCGCGGTAA	CCGYCAATTYMTTTRAGTTT	430
+16s_rRNA_V4_515F-806R	GTGYCAGCMGCCGCGGTAA	GGACTACNVGGGTWTCTAAT	253
+16s_rRNA_V4-V5_515F-926R	GTGYCAGCMGCCGCGGTAA	CCGYCAATTYMTTTRAGTTT	374
+ITS1_ITS1F-ITS2	CTTGGTCATTTAGAGGAAGTAA	GCTGCGTTCTTCATCGATGC	300
+ITS1_ITS1F-ITS86R	CTTGGTCATTTAGAGGAAGTAA	TTCAAAGATTCGATGATTCAG	300
+ITS2_ITS3-ITS4	GCATCGATGAAGAACGCAGC	TCCTCCGCTTATTGATATGC	450
+ITS2_ITS7-ITS4	GTGARTCATCGARTCTTTG	TCCTCCGCTTATTGATATGC	400
+ITS2_ITS86F-ITS4	GTGAATCATCGAATCTTTGAA	TCCTCCGCTTATTGATATGC	450
+18s_rRNA_V4_TAReuk454FWD1-TAReukREV3	GTGAATCATCGAATCTTTGAA	ACTTTCGTTCTTGATYRATGA	420
+18s_rRNA_V9_1380F-1510R	CCCTGCCHTTTGTACACAC	CCTTCYGCAGGTTCACCTAC	130
+18s_rRNA_V9_1391F-EukBr	GTACACACCGCCCGTC	TGATCCTTCTGCAGGTTCACCTAC	130
+CO1_mlCOIintF-dgHCO2198	GGWACWGGWTGAACWGTWTAYCCYCC	TAAACTTCAGGGTGACCAAARAAYCA	313
