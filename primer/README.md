@@ -24,8 +24,6 @@
 
 [Na H S, Song Y, Yu Y, et al. Comparative analysis of primers used for 16S rRNA gene sequencing in oral microbiome studies[J]. Methods and Protocols, 2023, 6(4): 71.](https://www.mdpi.com/2409-9279/6/4/71)
 
-
-
 ## 18s rRNA
 
 ![18s](./18s/18s.png)
@@ -36,18 +34,30 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 ## 12s
 
+**MiFish‐U:F/R** 
 
-12S-V5-F(also names:Riaz) (5′-ACTGGGATTAGATACCCC-3′)
+5′‐GTCGGTAAAACTCGTGCCAGC‐3′
 
-12S-V5-R (5′-TAGAACAGGCTCCTCTAG-3′)
+5′‐CATAGTGGGGTATCTAATCCCAGTTTG‐3
+
+**12S-V5(Riaz):F/R**
+
+5′-ACTGGGATTAGATACCCC-3′
+
+5′-TAGAACAGGCTCCTCTAG-3′
+
+**Tele02:F/R**
+
+5′-AAACTCGTGCCAGCCACC-3′
+
+5′-GGGTATCTAATCCCAGTTTG-3′
+
 
 ![12s_v5](./12s/12s_RiazV5_MiFish_Tele02.png)
 
-
-
 ![12s_teleo](./12s/Schematic-representation-of-a-the-mitochondrial-mitogenome-with-the-12S-mitochondrial.png)
 
-[Blabolil P, Harper L R, Říčanová Š, et al. Environmental DNA metabarcoding uncovers environmental correlates of fish communities in spatially heterogeneous freshwater habitats[J]. Ecological Indicators, 2021, 126: 107698.](https://www.sciencedirect.com/science/article/pii/S1470160X21003630)
+[Oliveira Carvalho C, Pazirgiannidi M, Ravelomanana T, et al. Multi-method survey rediscovers critically endangered species and strengthens Madagascar's freshwater fish conservation[J]. Scientific Reports, 2024, 14(1): 20427.](https://www.nature.com/articles/s41598-024-71398-z)
 
 [Miya M, Sato Y, Fukunaga T, et al. MiFish, a set of universal PCR primers for metabarcoding environmental DNA from fishes: detection of more than 230 subtropical marine species[J]. Royal Society open science, 2015, 2(7): 150088.](https://royalsocietypublishing.org/doi/full/10.1098/rsos.150088)
 

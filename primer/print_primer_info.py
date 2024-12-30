@@ -14,8 +14,14 @@ with open("primer.tsv", "w") as primer_tsv:
                      "ACTGGGATTAGATACCCC\t"
                      "TAGAACAGGCTCCTCTAG\t"
                      "117\t"
-                     "https://github.com/billzt/MiFish,Miya M, Sato Y, Fukunaga T, et al. MiFish, a set of universal PCR primers for metabarcoding environmental DNA from fishes: detection of more than 230 subtropical marine species[J]. Royal Society open science, 2015, 2(7): 150088.\n"
+                     "Oliveira Carvalho C, Pazirgiannidi M, Ravelomanana T, et al. Multi-method survey rediscovers critically endangered species and strengthens Madagascar's freshwater fish conservation[J]. Scientific Reports, 2024, 14(1): 20427.](https://www.nature.com/articles/s41598-024-71398-z.\n"
                      )
+
+    primer_tsv.write("12s_rRNA_Tele02\t"
+                     "AAACTCGTGCCAGCCACC\t"
+                     "GGGTATCTAATCCCAGTTTG\t"
+                     "209\t"
+                     "Oliveira Carvalho C, Pazirgiannidi M, Ravelomanana T, et al. Multi-method survey rediscovers critically endangered species and strengthens Madagascar's freshwater fish conservation[J]. Scientific Reports, 2024, 14(1): 20427.](https://www.nature.com/articles/s41598-024-71398-z)\n")
 
     primer_tsv.write("Fish_16s_rRNA_F/D_16S2R\t"
                      "GACCCTATGGAGCTTTAGAC\t"
