@@ -69,6 +69,12 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 ## CO1
 
+**mlCOIintF_dgHCO-2198**
+
+5′-GGWACWGGWTGAACWGTWTAYCCYCC-3′
+
+5′-TAAACTTCAGGGTGACCAAARAAYCA-3′
+
 ![CO1](./CO1/CO1.png)
 
 [Hajibabaei M, Porter T M, Wright M, et al. COI metabarcoding primer choice affects richness and recovery of indicator taxa in freshwater systems[J]. PLoS One, 2019, 14(9): e0220953.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0220953)
