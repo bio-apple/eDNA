@@ -2,6 +2,12 @@
 
 ![Observing Life in the Sea Using Environmental DNA](./Observing_Life_in_the_Sea_Using_Environmental_DNA.jpg)
 
+**List of the 10 most commonly used metabarcoding primers in aquatic eDNA research**
+
+![primer](./primers.png)
+
+[Takahashi M, Saccò M, Kestel J H, et al. Aquatic environmental DNA: A review of the macro-organismal biomonitoring revolution[J]. Science of the Total Environment, 2023, 873: 162322.](https://www.sciencedirect.com/science/article/pii/S0048969723009385)
+
 ## ITS region
 
 ![ITS region](./ITS/ITS-region.png)
