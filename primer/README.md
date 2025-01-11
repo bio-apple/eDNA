@@ -20,7 +20,7 @@
 
 [Op De Beeck M, Lievens B, Busschaert P, et al. Comparison and validation of some ITS primer pairs useful for fungal metabarcoding studies[J]. PloS one, 2014, 9(6): e97629.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0097629)
 
-## 16s 
+## 16s rRNA
 
 ![16s](./16s/16S_ribosomal_RNA_gene.png)
 
@@ -42,7 +42,7 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 [Zheng X, He Z, Wang C, et al. Evaluation of different primers of the 18S rRNA gene to profile amoeba communities in environmental samples[J]. Water Biology and Security, 2022, 1(3): 100057.](https://www.sciencedirect.com/science/article/pii/S2772735122000774)
 
-## 12s
+## 12s rRNA
 
 ![12s_v5](./12s/12s_RiazV5_MiFish_Tele02.png)
 
