@@ -9,9 +9,15 @@ with open("primer.tsv", "w") as primer_tsv:
                      "185\n"
                      )
 
-    primer_tsv.write("12s_rRNA_V5_Riaz\t"
+    primer_tsv.write("12s_rRNA_Riaz\t"
                      "ACTGGGATTAGATACCCC\t"
                      "TAGAACAGGCTCCTCTAG\t"
+                     "117\n"
+                     )
+
+    primer_tsv.write("12s_rRNA_V5\t"
+                     "TAGAACAGGCTCCTCTAG\t"
+                     "TTAGATACCCCACTATGC\t"
                      "117\n"
                      )
 
