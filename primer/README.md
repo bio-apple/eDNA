@@ -30,6 +30,10 @@
 
 [Na H S, Song Y, Yu Y, et al. Comparative analysis of primers used for 16S rRNA gene sequencing in oral microbiome studies[J]. Methods and Protocols, 2023, 6(4): 71.](https://www.mdpi.com/2409-9279/6/4/71)
 
+![16s](./16s/16s_rRNA_eDNA.png)
+
+[Adams C I M, Jeunen G J, Cross H, et al. Environmental DNA metabarcoding describes biodiversity across marine gradients[J]. ICES Journal of Marine Science, 2023, 80(4): 953-971.](https://academic.oup.com/icesjms/article/80/4/953/7058017?login=false)
+
 ## 18s rRNA
 
 ![18s](./18s/18s.png)
