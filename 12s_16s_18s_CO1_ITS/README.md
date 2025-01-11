@@ -54,14 +54,14 @@ V4 (expected amplicon size, 270 bp–387bp) and V9 (expected amplicon size, 96 b
 
 文献论述了在研究fish eDNA时引物的重要性,文章中指出 primers Riaz-12S and 12S-V5是一个很好的选择
 
-![edna-fish](./fish_eDNA_primer.png)
+![edna-fish](./12s/fish_eDNA_primer.png)
 
 [Min X, Li F, Zhang X, et al. Choice of primer pairs and PCR polymerase affect the detection of fish eDNA[J]. Environmental Sciences Europe, 2023, 35(1): 103.](https://link.springer.com/article/10.1186/s12302-023-00812-6)
 
 fish eDNA研究中几种引物的共同比较，研究表明还是Results indicate that MiFish consistently outperforms other primers, detecting the highest number of fish species
 across all ecosystems and exhibiting superior taxonomic coverage.
 
-![edna-fish](./fish_eDNA_primer_all.png)
+![edna-fish](./12s/fish_eDNA_primer_all.png)
 
 ## CO1
 
