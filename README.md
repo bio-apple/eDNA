@@ -18,7 +18,7 @@ zero-radius OTUs:**ZOTUs**
 
 ## bioinformatics pipeline
 
-![bmc](./bioinformatics.jpg)
+![bmc](./bioinfomatics/bioinformatics.jpg)
 
 [Li Z, Zhao W, Jiang Y, et al. New insights into biologic interpretation of bioinformatic pipelines for fish eDNA metabarcoding: A case study in Pearl River estuary[J]. Journal of Environmental Management, 2024, 368: 122136.](https://www.sciencedirect.com/science/article/pii/S0301479724021224)
 
