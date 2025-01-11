@@ -16,6 +16,15 @@ Amplicon Sequence Variants:**ASVs**, also known as Exact Sequence Variants **(ES
 
 zero-radius OTUs:**ZOTUs**
 
+## bioinformatics pipeline
+
+![bmc](./bioinformatics.jpg)
+
+[Li Z, Zhao W, Jiang Y, et al. New insights into biologic interpretation of bioinformatic pipelines for fish eDNA metabarcoding: A case study in Pearl River estuary[J]. Journal of Environmental Management, 2024, 368: 122136.](https://www.sciencedirect.com/science/article/pii/S0301479724021224)
+
+[Hakimzadeh A, Abdala Asbun A, Albanese D, et al. A pile of pipelines: An overview of the bioinformatics software for metabarcoding data analyses[J]. Molecular Ecology Resources, 2024, 24(5): e13847.](https://onlinelibrary.wiley.com/doi/abs/10.1111/1755-0998.13847)
+
+
 ## 构建docker镜像 [Build docker images](./Docker)
 
     cd Docker/
@@ -25,15 +34,6 @@ zero-radius OTUs:**ZOTUs**
 
     mkdir -p ref/ASV
     cd ref/ASV
-
-
-## [Reference paper](./paper/)
-
-[Li Z, Zhao W, Jiang Y, et al. New insights into biologic interpretation of bioinformatic pipelines for fish eDNA metabarcoding: A case study in Pearl River estuary[J]. Journal of Environmental Management, 2024, 368: 122136.](https://www.sciencedirect.com/science/article/pii/S0301479724021224)
-
-[Hakimzadeh A, Abdala Asbun A, Albanese D, et al. A pile of pipelines: An overview of the bioinformatics software for metabarcoding data analyses[J]. Molecular Ecology Resources, 2024, 24(5): e13847.](https://onlinelibrary.wiley.com/doi/abs/10.1111/1755-0998.13847)
-
-[Ruppert K M, Kline R J, Rahman M S. Past, present, and future perspectives of environmental DNA (eDNA) metabarcoding: A systematic review in methods, monitoring, and applications of global eDNA[J]. Global Ecology and Conservation, 2019, 17: e00547.](https://www.sciencedirect.com/science/article/pii/S2351989418303500)
 
 
 
