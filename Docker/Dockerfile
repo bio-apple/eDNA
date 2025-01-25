@@ -22,6 +22,7 @@ RUN cd /opt/conda/envs/MiFish && git clone https://github.com/billzt/MiFish.git 
 FROM mifish as base
 RUN /opt/conda/bin/mamba create --name picrust2 -c bioconda -c conda-forge picrust2 &&  \
     /opt/conda/bin/conda create --name R conda-forge::r-base bioconda::bioconductor-dada2 conda-forge::r-vegan conda-forge::r-ggplot2 conda-forge::r-dplyr  \
-bioconda::bioconductor-phyloseq bioconda::bioconductor-decipher bioconductor-shortread bioconductor-biostrings \
-bioconductor-biomformat bioconductor-aldex2 conda-forge::r-stringr conda-forge::r-tidyr
+    bioconda::bioconductor-phyloseq bioconda::bioconductor-decipher bioconductor-shortread bioconductor-biostrings  \
+    bioconductor-biomformat bioconductor-aldex2 conda-forge::r-stringr conda-forge::r-tidyr &&  \
+    /opt/conda/bin/conda install bioconda::kraken2 bioconda::krakentools bioconda::krona bioconda::bracken
 

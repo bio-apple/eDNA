@@ -47,23 +47,25 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
             #Plot quality profile of a fastq file
             f"png(filename=\"/outdir/{prefix}.R1.png\",res=200,height = 1000,width=2000)\n"
             f"plotQualityProfile(fnFs)\n"
-            f"dev.off()"
+            f"dev.off()\n"
             f"png(filename=\"/outdir/{prefix}.R2.png\",res=200,height = 1000,width=2000)\n"
             f"plotQualityProfile(fnRs)\n"
-            f"dev.off()"
+            f"dev.off()\n"
             
             #Filter and trim用于对数据进行质量过滤，生成更高质量的 FASTQ 文件
             f"filtFs<-file.path(\"/outdir/\",\"{prefix}_F_filt.fastq.gz\")\n"
             f"filtRs<-file.path(\"/outdir/\",\"{prefix}_R_filt.fastq.gz\")\n"
-            f"out<-filterAndTrim(fnFs,filtFs, fnRs,filtRs,maxN=0,trimLeft=c({left}, {right}),maxEE=c(2,2),truncQ=2,rm.phix=TRUE,compress=TRUE,multithread=TRUE)\n"
+            #Nilsen T, Snipen L G, Angell I L, et al. Swarm and UNOISE outperform DADA2 and Deblur for denoising high-diversity marine seafloor samples[J]. ISME communications, 2024, 4(1).
+            #maxEE=c(2.75,5.5)
+            f"out<-filterAndTrim(fnFs,filtFs, fnRs,filtRs,maxN=0,trimLeft=c({left}, {right}),maxEE=c(2.75,5.5),rm.phix=TRUE,compress=TRUE,multithread=TRUE)\n"
             
             #Learn the Error Rates通过训练数据学习测序误差模型
             f"errF=learnErrors(filtFs, multithread=TRUE)\n"
             f"errR=learnErrors(filtRs, multithread=TRUE)\n"
-            f"png(filename = \"/outdir/{prefix}.R1.Error_Rates.png\")\n"
+            f"png(filename = \"/outdir/{prefix}.R1.Error_Rates.png\",res=100,width = 1200, height = 600)\n"
             f"plotErrors(errF, nominalQ=TRUE)\n"
             f"dev.off()\n"
-            f"png(filename = \"/outdir/{prefix}.R2.Error_Rates.png\")\n"
+            f"png(filename = \"/outdir/{prefix}.R2.Error_Rates.png\",res=100,width = 1200, height = 600)\n"
             f"plotErrors(errR, nominalQ=TRUE)\n"
             f"dev.off()\n"
             
@@ -88,17 +90,60 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
             #Assign taxonomy
             f"taxa <- assignTaxonomy(seqtab.nochim, \"/ref/{train}\", multithread=TRUE)\n"
             f"taxa <- addSpecies(taxa, \"/ref/{test}\")\n"
-            f"write.csv(taxa, file = \"/outdir/{prefix}.tax.csv\",row.name=TRUE)\n"
+            f"write.csv(taxa, file = \"/outdir/{prefix}.taxa.csv\",row.name=TRUE)\n"
             
             #Track reads through the pipeline
             f"getN <- function(x) sum(getUniques(x))\n"
             f"track <- cbind(out, getN(dadaFs), getN(dadaRs), getN(mergers), rowSums(seqtab.nochim))\n"
             f"colnames(track) <- c(\"input\", \"filtered\", \"denoisedF\", \"denoisedR\", \"merged\", \"nonchim\")\nrownames(track) <- \"{prefix}\"\n"
             f"track_df <- as.data.frame(track)\n"
-            f"write.csv(track_df, file = \"/outdir/{prefix}.track_reads_through_pipeline.csv\", row.names = TRUE, quote = FALSE)\n"
+            f"write.csv(track_df, file = \"/outdir/{prefix}.track_reads.csv\", row.names = TRUE, quote = FALSE)\n"
         )
+    print(cmd)
+    if os.path.exists(f"{outdir}/{prefix}.seqtab.nochim.csv"):
+        subprocess.check_call(f'rm -rf {outdir}/{prefix}.seqtab.nochim.csv', shell=True)
+    if os.path.exists(f"{outdir}/{prefix}.taxa.csv"):
+        subprocess.check_call(f'rm -rf {outdir}/{prefix}.taxa.csv', shell=True)
     subprocess.check_call(cmd, shell=True)
+    infile1=open(f"{outdir}/{prefix}.seqtab.nochim.csv","r")
+    seqs,counts,num=[],{},0
+    for line in infile1:
+        num+=1
+        line=line.strip()
+        array=line.split(",")
+        if num!=1:
+            counts[array[0]]=array[1]
+    infile1.close()
 
+    infile2 = open(f"{outdir}/{prefix}.taxa.csv", "r")
+    num,tax=0,{}
+    for line in infile2:
+        num+=1
+        line=line.strip()
+        array=line.split(",")
+        if num!=1:
+            for i in range(0,len(array)):
+                if i==0:
+                    tax[array[0]]=""
+                else:
+                    tax[array[0]]+=array[i]+";"
+            tax[array[0]].strip(";")
+    infile2.close()
+
+    ID,num={},0
+    outfile=open(f"{outdir}/{prefix}.fasta","w")
+    for i in counts:
+        num+=1
+        ID[i]=f"AVS_{num}_length_{len(i)}_conuts_{counts[i]}"
+        outfile.write(f">{ID[i]}\n{i}\n")
+    outfile.close()
+
+    outfile = open(f"{outdir}/{prefix}.taxa.tsv", "w")
+    outfile.write("#SeqID\tSequence\tTaxonomy\n")
+    for i in tax:
+        outfile.write(f"{ID[i]}\t{i}\t{tax[i]}\n")
+    outfile.close()
+    subprocess.check_call(f'rm -rf {outdir}/{prefix}.seqtab.nochim.csv {outdir}/{prefix}.taxa.csv', shell=True)
 
 
 if __name__ == "__main__":
@@ -110,7 +155,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--outdir", required=True, help="output directory")
     parser.add_argument("-t","--type",required=True,choices=["16s","18s","ITS"],help="type of sample")
     parser.add_argument("-r","--ref",required=True,help="reference fasta")
-    parser.add_argument("-p","--primer",required=True,help="primer file",require=True)
-    parser.add_argument("-n","--name",required=True,help="primer name",require=True)
+    parser.add_argument("-pr","--primer",required=True,help="primer file")
+    parser.add_argument("-n","--name",required=True,help="primer name")
     args = parser.parse_args()
     run(args.pe1,args.pe2,args.prefix,args.outdir,args.ref,args.type,args.primer,args.name)

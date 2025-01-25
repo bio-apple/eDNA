@@ -4,14 +4,13 @@ import argparse
 import json
 
 docker="edna:latest"
-def run(pe1,outdir,prefix,pe2=None):
+def run(pe1,outdir,prefix,read_length,pe2=None):
     pe1 = os.path.abspath(pe1)
     in_dir = os.path.dirname(pe1)
     outdir = os.path.abspath(outdir)
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     a = pe1.split("/")[-1]
-
     cmd = "docker run -v %s:/raw_data/ -v %s:/outdir/ %s " % (in_dir,outdir, docker)
     cmd += ("sh -c \'fastp -i /raw_data/%s -o /outdir/%s.clean_R1.fastq "
             "--length_required 75 --thread 16 --low_complexity_filter --qualified_quality_phred 20 "
@@ -52,6 +51,7 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser("Run fastp quality control.")
     parser.add_argument("-p1","--pe1",help="R1 fastq.gz",required=True)
     parser.add_argument("-p2","--pe2",help="R2 fastq.gz",default=None)
+    parser.add_argument("-rl","--read_length",help="read length",required=True)
     parser.add_argument("-p","--prefix",help="prefix of output",required=True)
     parser.add_argument("-o","--outdir",help="output directory",required=True)
     args=parser.parse_args()
