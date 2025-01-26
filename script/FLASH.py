@@ -1,7 +1,7 @@
 import argparse
 import os,sys,re,subprocess
 
-docker="enda:latest"
+docker="edna:latest"
 
 def run(pe1,pe2,prefix,outdir):
     pe1=os.path.abspath(pe1)
