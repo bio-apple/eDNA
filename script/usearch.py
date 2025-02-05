@@ -16,7 +16,7 @@ args.pe2=os.path.abspath(args.pe2)
 args.outdir=os.path.abspath(args.outdir)
 
 if not os.path.exists(args.outdir):
-    subprocess.check_call(["mkdir",args.outdir],shell=True)
+    subprocess.check_call(["mkdir -p",args.outdir],shell=True)
 
 if os.path.dirname(args.pe1)!=os.path.dirname(args.pe2):
     print("R1 and R2 must be in the same directory")
