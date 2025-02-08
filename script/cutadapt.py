@@ -22,7 +22,7 @@ def run(R1, R2,primer,name,prefix,outdir,read):
     R1=os.path.abspath(R1)
     primer=os.path.abspath(primer)
     outdir=os.path.abspath(outdir)
-    cmd = f"docker run -v {os.path.dirname(R1)}:/raw_data -v {os.path.dirname(primer)}:/ref/ -v {outdir}:/outdir/ {docker} sh -c \'export PATH=/opt/conda/envs/MiFish/bin/:$PATH && "
+    cmd = f"docker run -v {os.path.dirname(R1)}:/raw_data -v {os.path.dirname(primer)}:/ref/ -v {outdir}:/outdir/ {docker} sh -c \'export PATH=/opt/conda/envs/edna/bin/:$PATH && "
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     forward, reverse,amplicon = "","",0

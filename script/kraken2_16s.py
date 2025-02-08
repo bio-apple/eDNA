@@ -19,7 +19,7 @@ if not os.path.exists(args.outdir):
 
 file_name=args.fna.split('/')[-1]
 
-cmd=(f"docker run -v {raw_data}:/raw_data -v {os.path.abspath(args.ref)}:/ref/ -v {args.outdir}:/outdir/ {docker} sh -c \'export PATH=\"/opt/conda/bin:$PATH\" && "
+cmd=(f"docker run -v {raw_data}:/raw_data -v {os.path.abspath(args.ref)}:/ref/ -v {args.outdir}:/outdir/ {docker} sh -c \'export PATH=\"/opt/conda/envs/edna/bin:$PATH\" && "
      f"kraken2 --db /ref/ --threads 24 --output /outdir/{args.prefix}.txt --report /outdir/{args.prefix}.report.txt /raw_data/{file_name} && "
      f"kreport2krona.py -r /outdir/{args.prefix}.report.txt -o /outdir/{args.prefix}.krona.txt --no-intermediate-ranks && "
      f"ktImportText /outdir/{args.prefix}.krona.txt -o /outdir/{args.prefix}.krona.html\'")

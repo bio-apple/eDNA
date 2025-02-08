@@ -15,7 +15,7 @@ def run(pe1,pe2,prefix,outdir):
     cmd=f'docker run -v {os.path.dirname(pe1)}:/raw_data/ -v {outdir}:/outdir/ {docker} sh -c \''
     R1=pe1.split('/')[-1]
     R2=pe2.split('/')[-1]
-    cmd+=f"export PATH=/opt/conda/envs/MiFish/bin:$PATH && flash -o {prefix} -d /outdir/ /raw_data/{R1} /raw_data/{R2}\'"
+    cmd+=f"export PATH=/opt/conda/envs/edna/bin:$PATH && flash -o {prefix} -d /outdir/ /raw_data/{R1} /raw_data/{R2}\'"
     subprocess.check_call(cmd,shell=True)
 
 if __name__ == "__main__":

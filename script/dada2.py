@@ -33,7 +33,7 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
                 right=line.split(",")[4]
 
     cmd=(f"docker run -v {outdir}:/outdir -v {raw_data}:/raw_data/ -v {os.path.dirname(ref)}:/ref/ "
-         f"{docker} sh -c \'cd /outdir/ && /opt/conda/envs/R/bin/Rscript /outdir/{prefix}.Rscript\'")
+         f"{docker} sh -c \'cd /outdir/ && /opt/conda/envs/edna/bin/Rscript /outdir/{prefix}.Rscript\'")
     with open(f"{outdir}/{prefix}.Rscript","w") as script:
         file_name1=R1.split("/")[-1]
         file_name2=R2.split("/")[-1]
@@ -78,7 +78,12 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
             f"dadaRs <- dada(derep_reverse, err=errR, multithread=TRUE)\n"
             
             #Merge paired reads
-            f"mergers <- mergePairs(dadaFs, derep_forward, dadaRs, derep_reverse, verbose=TRUE,minOverlap = 10)\n"
+            #Babis W, Jastrzebski J P, Ciesielski S. Fine-Tuning of DADA2 Parameters for Multiregional Metabarcoding Analysis of 16S rRNA Genes from Activated Sludge and Comparison of Taxonomy Classification Power and Taxonomy Databases[J]. International Journal of Molecular Sciences, 2024, 25(6): 3508.
+            #minOverlap=8
+            #Fadeev E, Cardozo-Mino M G, Rapp J Z, et al. Comparison of two 16S rRNA primers (V3–V4 and V4–V5) for studies of arctic microbial communities[J]. Frontiers in microbiology, 2021, 12: 637526.
+            #minOverlap=10
+            #default:minOverlap=12
+            f"mergers <- mergePairs(dadaFs, derep_forward, dadaRs, derep_reverse,minOverlap=8,verbose=TRUE)\n"
             
             #Construct sequence table
             f"seqtab <- makeSequenceTable(mergers)\n"
@@ -112,6 +117,7 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
         line=line.strip()
         array=line.split(",")
         if num!=1:
+            array[0]=array[0].strip("\"")
             counts[array[0]]=array[1]
     infile1.close()
 
@@ -121,6 +127,7 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
         num+=1
         line=line.strip()
         array=line.split(",")
+        array[0]=array[0].strip("\"")
         if num!=1:
             for i in range(0,len(array)):
                 if i==0:
@@ -135,6 +142,7 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
     for i in counts:
         num+=1
         ID[i]=f"AVS_{num}_length_{len(i)}_conuts_{counts[i]}"
+
         outfile.write(f">{ID[i]}\n{i}\n")
     outfile.close()
 
@@ -144,7 +152,6 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
         outfile.write(f"{ID[i]}\t{i}\t{tax[i]}\n")
     outfile.close()
     subprocess.check_call(f'rm -rf {outdir}/{prefix}.seqtab.nochim.csv {outdir}/{prefix}.taxa.csv', shell=True)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
