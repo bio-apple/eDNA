@@ -56,7 +56,7 @@ The data flow diagram is as follows
 
 [Aho V T E, Pereira P A B, Voutilainen S, et al. Gut microbiota in Parkinson's disease: temporal stability and relations to disease progression[J]. EBioMedicine, 2019, 44: 691-707.](https://www.thelancet.com/journals/ebiom/article/PIIS2352-3964(19)30372-X/fulltext)
 
-### example:
+### The example command is as follows
 
     python3 script/fastqc.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -o outdir/1.fastqc/
 
