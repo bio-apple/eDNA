@@ -1,7 +1,7 @@
 import os
 import sys
 
-with open("primer.tsv", "w") as primer_tsv:
+with open("../script/primer.tsv", "w") as primer_tsv:
     primer_tsv.write("Name\tForward\tReverse\tAmplicon_max_Length(bp)\n")
     primer_tsv.write("12s_rRNA_MiFish-U_MiFish-L\t"
                      "GTCGGTAAAACTCGTGCCAGC\t"

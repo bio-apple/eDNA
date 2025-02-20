@@ -34,7 +34,7 @@ zero-radius OTUs:**ZOTUs**
 
 **Bioinformatic Methods for Biodiversity Metabarcoding**:https://learnmetabarcoding.github.io/LearnMetabarcoding/index.html
 
-## Pipeline
+## Bioinformatics Pipeline
 
 The data flow diagram is as follows
 
@@ -42,18 +42,28 @@ The data flow diagram is as follows
 
 ### prepare 
 
-**step1:docker images**
+**docker images**
 
     cd Docker/
     docker build -t edna ./
 
-**step2:refernce**
+**refernce**
 
     mkdir ref/
     python3 script/qiime_Greengene2_RefSeq_SILVA.py -v 138.2 -o ref/
 
-**step3:16s rRNA demo data**:https://www.ncbi.nlm.nih.gov/bioproject/PRJEB27564
+**16s rRNA demo data**:https://www.ncbi.nlm.nih.gov/bioproject/PRJEB27564
 
 [Aho V T E, Pereira P A B, Voutilainen S, et al. Gut microbiota in Parkinson's disease: temporal stability and relations to disease progression[J]. EBioMedicine, 2019, 44: 691-707.](https://www.thelancet.com/journals/ebiom/article/PIIS2352-3964(19)30372-X/fulltext)
 
+### example:
 
+    python3 script/fastqc.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -o outdir/1.fastqc/
+
+    python3 script/fastp.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
+
+    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730395.clean_R1.fastq -p2 outdir/2.fastp/ERR2730395.clean_R2.fastq -p ERR2730395
+
+    python3 script/dada2_v2.0.py -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza -i outdir/3.cutadapt/ -o outdir/4.dada2/
+
+    python3 script/usearch_v2.0.py -p1 outdir/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R1.fastq.gz -p2 outdir/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R2.fastq.gz -p ERR2730388,ERR2730391 -o outdir/test/ -g ref/qiime/2024.09.backbone.full-length.nb.qza -r ref/qiime/ncbi-refseqs-classifier.qza
