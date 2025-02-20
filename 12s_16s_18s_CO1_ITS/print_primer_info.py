@@ -50,7 +50,10 @@ with open("primer.tsv", "w") as primer_tsv:
                      "ATTACCGCGGCTGCTGG\t"#534R
                      "500\n"
                      )
-
+    primer_tsv.write("16s_rRNA_V1-V3_27F-536R_pham\t"
+                     "AGAGTTTGATCCTGGCTCAG\t"
+                     "GTATTACCGCGGCTGCTGGC\t"
+                     "503\n")
     primer_tsv.write("16s_rRNA_V3-v4_341F-785R\t" #更加通用，适合广谱扩增，用于分析复杂环境样本（如土壤、水样）
                      "CCTACGGGNGGCWGCAG\t"#341F
                      "GACTACHVGGGTATCTAATCC\t"#785R
