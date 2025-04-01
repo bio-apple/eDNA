@@ -66,13 +66,3 @@ The data flow diagram is as follows
     python3 script/dada2.py -s ref/silva-138.2-ssu-nr99-classifier.qza -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza -i outdir/3.cutadapt/ -o outdir/4.dada2/
 
     python3 script/usearch.py -p1 outdir/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R1.fastq.gz -p2 outdir/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R2.fastq.gz -p ERR2730388,ERR2730391 -o outdir/test/ -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza
-
-
-
-FROM mothur AS mifish
-RUN /opt/conda/bin/conda create -n MiFish python==3.9.13 &&  \
-    /opt/conda/bin/conda install -n MiFish --channel conda-forge --channel bioconda --channel defaults numpy  \
-    scikit-bio anaconda::pyqt ete3 duckdb cutadapt XlsxWriter biopython fastp flash seqkit vsearch blast fasttree gblocks &&  \
-    git clone https://github.com/billzt/MiFish.git && cd MiFish && /opt/conda/envs/MiFish/bin/python3 setup.py develop && \
-    /opt/conda/bin/conda clean -a -y
-https://github.com/tao-bioinfo/MiFish/archive/refs/heads/main.zip
