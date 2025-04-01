@@ -34,7 +34,7 @@ def run(outdir,version):
                       f"--i-taxa /ref/silva-{version}-ssu-nr99-tax.qza "
                       f"--p-mode \'uniq\' --o-dereplicated-sequences /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza "
                       f"--o-dereplicated-taxa /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza && "
-                      f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza --i-reference-taxonomy /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza --o-classifier /ref/silva-{version}-ssu-nr99-classifier.qza\"")
+                  f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza --i-reference-taxonomy /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza --o-classifier /ref/silva-{version}-ssu-nr99-classifier.qza\"")
     print(SILVA)
     subprocess.check_call(SILVA, shell=True)
 
@@ -53,8 +53,8 @@ def run(outdir,version):
     subprocess.check_call(f'wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz && gunzip MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz && '
                           f'wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz && gunzip MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz',shell=True)
     s_12=docker+(f"qiime tools import --type \'FeatureData[Sequence]\' --input-path /ref/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta--output-path /ref/midori2-12s-sequences.qza && "
-                f"qiime tools import --type \'FeatureData[Taxonomy]\' --input-path /ref/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz --output-path /ref/midori2-12s-taxonomy.qza && "
-                f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/midori2-12s-sequences.qza --i-reference-taxonomy /ref/midori2-12s-taxonomy.qza --o-classifier /ref/midori2-12s-classifier.qza\"")
+                 f"qiime tools import --type \'FeatureData[Taxonomy]\' --input-path /ref/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz --output-path /ref/midori2-12s-taxonomy.qza && "
+                 f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/midori2-12s-sequences.qza --i-reference-taxonomy /ref/midori2-12s-taxonomy.qza --o-classifier /ref/midori2-12s-classifier.qza\"")
     subprocess.check_call(s_12,shell=True)
 
     files = os.listdir(outdir)
