@@ -34,7 +34,7 @@ def run(outdir,version):
                       f"--i-taxa /ref/silva-{version}-ssu-nr99-tax.qza "
                       f"--p-mode \'uniq\' --o-dereplicated-sequences /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza "
                       f"--o-dereplicated-taxa /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza && "
-                  f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza --i-reference-taxonomy /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza --o-classifier /ref/silva-{version}-ssu-nr99-classifier.qza\"")
+                      f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza --i-reference-taxonomy /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza --o-classifier /ref/silva-{version}-ssu-nr99-classifier.qza\"")
     print(SILVA)
     subprocess.check_call(SILVA, shell=True)
 
