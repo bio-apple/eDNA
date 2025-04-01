@@ -53,7 +53,7 @@ The data flow diagram is as follows
 **refernce**
 
     mkdir ref/
-    python3 script/qiime_Greengene2_RefSeq_SILVA.py -v 138.2 -o ref/
+    python3 script/qiime_12s_16s-18s_ITS_CO1.py -v 138.2 -o ref/
 
 ### The example command is as follows
 
