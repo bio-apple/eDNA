@@ -57,6 +57,8 @@ The data flow diagram is as follows
 
 ### The example command is as follows
 
+**16s rRNA pair-end**
+
     python3 script/fastqc.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -o outdir/1.fastqc/
 
     python3 script/fastp.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
@@ -66,3 +68,7 @@ The data flow diagram is as follows
     python3 script/dada2.py -s ref/silva-138.2-ssu-nr99-classifier.qza -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza -i outdir/3.cutadapt/ -o outdir/4.dada2/
 
     python3 script/usearch.py -p1 outdir/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R1.fastq.gz -p2 outdir/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R2.fastq.gz -p ERR2730388,ERR2730391 -o outdir/test/ -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza
+
+**18s rRNA/12s rRNA/CO1/ITS**
+
+  
