@@ -103,7 +103,6 @@ if args.pe2!=None:
         infile.close()
         if int(subprocess.check_output(["wc -l", f"{args.outdir}/5.usearch/{c}.zmap.txt"]).split()[0]) >= zmax_depth:
             zmax_depth = int(subprocess.check_output(["wc", "-l", f"{args.outdir}/{c}.map.txt"]).split()[0])
-
 #######################################################
 refs,db_name=[],[]
 if args.type=="16s_single":
