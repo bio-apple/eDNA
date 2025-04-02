@@ -191,4 +191,4 @@ for db in db_name:
         f"qiime taxa barplot --i-table /outdir/5.usearch/qiime_zotu_table.qza --i-taxonomy /outdir/5.usearch/all.zotu.{db}.taxonomy.qza --o-visualization /outdir/5.usearch/zotu_{db}_taxa_barplot.qzv\'")
     print(tax)
     subprocess.check_call(tax, shell=True)
-subprocess.check_call(f'cd {args.outdir} && rm -rf *.biom *.zmap.txt *.merged.fastq',shell=True)
+subprocess.check_call(f'cd {args.outdir}/5.usearch && rm -rf *.biom *.zmap.txt *.merged.fastq',shell=True)
