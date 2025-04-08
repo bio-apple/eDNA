@@ -1,6 +1,6 @@
 # Reference database
 
-### 1.Greengenes2 https://ftp.microbio.me/greengenes_release/current/
+### 1.[Greengenes2](https://ftp.microbio.me/greengenes_release/current/)
 
         **<version>.backbone.v4.nb.qza**
     
@@ -10,17 +10,15 @@
     
         [McDonald D, Jiang Y, Balaban M, et al. Greengenes2 unifies microbial data in a single reference tree[J]. Nature biotechnology, 2024, 42(5): 715-718.](https://www.nature.com/articles/s41587-023-01845-1)
 
-### 2.RESCRIPt(REference Sequence annotation and CuRatIon Pipeline,https://github.com/bokulich-lab/RESCRIPt) is a python package and QIIME 2 plugin for formatting, managing, and manipulating sequence reference databases.
+### 2.[RESCRIPt:REference Sequence annotation and CuRatIon Pipeline](https://github.com/bokulich-lab/RESCRIPt) is a python package and QIIME 2 plugin for formatting, managing, and manipulating sequence reference databases. 
 
-NCBI RefSeq Targeted Loci Project:https://www.ncbi.nlm.nih.gov/refseq/targetedloci/)
-
-SILVA(https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494) 
+[NCBI RefSeq Targeted Loci Project](https://www.ncbi.nlm.nih.gov/refseq/targetedloci/) and [SILVA](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494)
    
 [Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
 
-       python3 qiime_NCBI-silva.py -v 138.2 -o /ref/qiime/
+    python3 qiime_NCBI-silva.py -v 138.2 -o /ref/qiime/
 
-### 3.MIDORI2(12s and CO1):https://reference-midori.info
+### 3.[MIDORI2:12s and CO1](https://reference-midori.info)
 
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz
@@ -39,20 +37,20 @@ SILVA(https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-d
 
 [Leray M, Knowlton N, Machida R J. MIDORI2: A collection of quality controlled, preformatted, and regularly updated reference databases for taxonomic assignment of eukaryotic mitochondrial sequences[J]. Environmental Dna, 2022, 4(4): 894-907.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.303)
  
-### 4.12s-18s-16s-CO1(only fish eDNA studies):https://zenodo.org/records/15028392 update:2025.03
+### 4.[12s-18s-16s-CO1:only fish eDNA studies](https://zenodo.org/records/15028392) update:2025.03
 
-        wget https://zenodo.org/records/15028392/files/12S-16S-18S-seqs.qza
-        wget https://zenodo.org/records/15028392/files/12S-16S-18S-tax.qza
-        docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/12S-16S-18S-seqs.qza --i-reference-taxonomy /ref/12S-16S-18S-tax.qza --o-classifier /ref/edna-fish-12S-16S-18S-classifier.qza'
-        
-        #CO1
-        wget https://zenodo.org/records/15028392/files/mitofish.COI.Mar2025.tsv
-        awk -F'\t' 'NR>1 {print $1"\tk__"$4"; p__"$5"; c__"$6"; o__"$7"; f__"$8"; g__"$9"; s__"$10}' mitofish.COI.Mar2025.tsv > mitofish_COI_taxonomy.tsv
-        sed -i '1iFeature ID\tTaxon' mitofish_COI_taxonomy.tsv
-        docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/mitofish_COI_taxonomy.tsv --output-path /ref/mitofish_COI_taxonomy.qza'
-        
-        awk -F'\t' 'NR>1 {print ">"$1"\n"$11}' mitofish.COI.Mar2025.tsv > mitofish_COI_sequences.fasta
-        docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/mitofish_COI_sequences.fasta --output-path /ref/mitofish_COI_sequences.qza'
-        docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/mitofish_COI_sequences.qza --i-reference-taxonomy /ref/mitofish_COI_taxonomy.qza --o-classifier /ref/mitofish_COI-classifier.qza'
-        
-    [Lim S J, Thompson L R. Mitohelper: A mitochondrial reference sequence analysis tool for fish eDNA studies[J]. Environmental DNA, 2021, 3(4): 706-715.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.187)
+    wget https://zenodo.org/records/15028392/files/12S-16S-18S-seqs.qza
+    wget https://zenodo.org/records/15028392/files/12S-16S-18S-tax.qza
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/12S-16S-18S-seqs.qza --i-reference-taxonomy /ref/12S-16S-18S-tax.qza --o-classifier /ref/edna-fish-12S-16S-18S-classifier.qza'
+    
+    #CO1
+    wget https://zenodo.org/records/15028392/files/mitofish.COI.Mar2025.tsv
+    awk -F'\t' 'NR>1 {print $1"\tk__"$4"; p__"$5"; c__"$6"; o__"$7"; f__"$8"; g__"$9"; s__"$10}' mitofish.COI.Mar2025.tsv > mitofish_COI_taxonomy.tsv
+    sed -i '1iFeature ID\tTaxon' mitofish_COI_taxonomy.tsv
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/mitofish_COI_taxonomy.tsv --output-path /ref/mitofish_COI_taxonomy.qza'
+    
+    awk -F'\t' 'NR>1 {print ">"$1"\n"$11}' mitofish.COI.Mar2025.tsv > mitofish_COI_sequences.fasta
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/mitofish_COI_sequences.fasta --output-path /ref/mitofish_COI_sequences.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/mitofish_COI_sequences.qza --i-reference-taxonomy /ref/mitofish_COI_taxonomy.qza --o-classifier /ref/mitofish_COI-classifier.qza'
+    
+[Lim S J, Thompson L R. Mitohelper: A mitochondrial reference sequence analysis tool for fish eDNA studies[J]. Environmental DNA, 2021, 3(4): 706-715.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.187)
