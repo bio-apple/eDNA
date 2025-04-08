@@ -23,12 +23,12 @@ https://ftp.microbio.me/greengenes_release/current/
     from the backbone sequences. NOTE: mitochondria and chloroplast sequences
     are included.
 
-### 2-2:NCBI RefSeq Targeted Loci Project
+### 2-2:NCBI RefSeq Targeted Loci Project+16s+18s
 https://www.ncbi.nlm.nih.gov/refseq/targetedloci/
 
 Using RESCRIPt to compile sequence databases and taxonomy classifiers from NCBI Genbank:https://forum.qiime2.org/t/using-rescript-to-compile-sequence-databases-and-taxonomy-classifiers-from-ncbi-genbank/15947
 
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-ncbi-data --p-query '33175[BioProject] OR 33317[BioProject]' --o-sequences /ref/ncbi-refseqs-unfiltered.qza --o-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza"
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-ncbi-data --p-query '33175[BioProject] OR 33317[BioProject] OR 39195[BioProject]' --o-sequences /ref/ncbi-refseqs-unfiltered.qza --o-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza"
     
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-seqs-length-by-taxon --i-sequences /ref/ncbi-refseqs-unfiltered.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --p-labels Archaea Bacteria --p-min-lens 900 1200 --o-filtered-seqs /ref/ncbi-refseqs.qza --o-discarded-seqs /ref/ncbi-refseqs-tooshort.qza"
 
@@ -45,3 +45,18 @@ https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-databas
 
 ## 3.dada2:SILVA
 https://benjjneb.github.io/dada2/training.html
+
+
+## 4.CO1+12s
+
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qimme tools import --type 'FeatureData[Sequence]' --input-path /ref/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta --output-path /ref/midori2-12s-sequences.qza'
+    { echo -e "Feature ID\tTaxon"; cat MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon; } > 12s
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/12s --output-path /ref/midori2-12s-taxonomy.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/midori2-12s-sequences.qza --i-reference-taxonomy /ref/midori2-12s-taxonomy.qza --o-classifier /ref/midori2-12s-classifier.qza'
+    
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/MIDORI2_LONGEST_NUC_GB264_CO1_QIIME.fasta --output-path /ref//ref/midori2-coi-sequences.qza'
+    echo -e "Feature ID\tTaxon"; cat MIDORI2_LONGEST_NUC_GB264_CO1_QIIME.taxon; } > CO1
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/CO1 --output-path /ref/midori2-coi-taxonomy.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/midori2-coi-sequences.qza --i-reference-taxonomy /ref/midori2-coi-taxonomy.qza --o-classifier /ref/midori2-coi-classifier.qza'
+    
+    
