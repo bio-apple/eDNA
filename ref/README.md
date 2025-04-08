@@ -32,7 +32,6 @@ Using RESCRIPt(https://github.com/bokulich-lab/RESCRIPt) to compile sequence dat
     wget https://data.qiime2.org/2024.10/common/silva-138-99-tax.qza
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/silva-138-99-seqs.qza --i-taxonomy /ref/silva-138-99-tax.qza --o-classifier /ref/silva-138.2-ssu-nr99-classifier.qza"
 
-
 ## 4.MIDORI2(12s and CO1):https://reference-midori.info
     
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz
