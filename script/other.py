@@ -3,20 +3,22 @@ import subprocess
 import argparse
 
 docker="edna:latest"
-script_path = os.path.abspath(__file__)
+script_path = os.path.dirname(os.path.abspath(__file__))
+
 parser = argparse.ArgumentParser("")
 parser.add_argument("-p1", "--pe1", help="several R1 fastq files,split by comma", required=True)
 parser.add_argument("-p2", "--pe2", help="several R2 fastq files,split by comma",default=None)
 parser.add_argument("-p", "--prefix", help="prefix of output files,split by comma", required=True)
 parser.add_argument("-o", "--outdir", help="output directory", required=True)
-parser.add_argument("-t",type="type of data",choices=["16s_single","18s","ITS","CO1","12s"],required=True)
+parser.add_argument("-t","--type",help="type of data",choices=["16s_single","18s","ITS","CO1","12s",'efish'],required=True)
 parser.add_argument("-r","--refseq",help="refseq qiime classify file",required=True)
 parser.add_argument("-s","--silva",help="silva qiime classify file",required=True)
 parser.add_argument("-g","--greengene2",help="greengene2 qiime classify file",required=True)
-parser.add_argument("-I","--ITS",help="ITS qiime classify file",required=True)
-parser.add_argument("-C","--CO1",help="CO1 qiime classify file",required=True)
+parser.add_argument("-i","--ITS",help="ITS qiime classify file",required=True)
+parser.add_argument("-e","--efish",help="database:edna-fish-12S-16S-18S")
+parser.add_argument("-c","--CO1",help="CO1 qiime classify file",required=True)
 parser.add_argument("-s12","--s12",help="12s rRNA qiime classify file",required=True)
-parser.add_argument("-p","--primer",help="primer file",required=True)
+parser.add_argument("-m","--primer",help="primer file",required=True)
 parser.add_argument("-n","--name",help="primer name",required=True)
 args = parser.parse_args()
 
@@ -42,6 +44,7 @@ for line in infile:
 infile.close()
 reverse_forward_c = reverse_complement_sequence(reverse)#-a
 
+args.outdir=os.path.abspath(args.outdir)
 cmd=f"docker run -v {args.outdir}:/outdir/ {docker} sh -c \'export PATH=/opt/conda/envs/edna/bin/:$PATH && "
 ####prepare
 args.outdir=os.path.abspath(args.outdir)
@@ -59,11 +62,11 @@ if args.pe2!=None:
         subprocess.check_call(f'python3 {script_path}/fastqc.py -p1 {a} -p2 {b} -o {args.outdir}/1.fastqc/',shell=True)
         subprocess.check_call(f'python3 {script_path}/fastp.py -p1 {a} -p2 {b} -p {c} -o {args.outdir}/2.fastp/',shell=True)
         subprocess.check_call(f"python3 {script_path}/FLASH.py -p1 {args.outdir}/2.fastp/{c}.clean_R1.fastq -p2 {args.outdir}/2.fastp/{c}.clean_R2.fastq -o {args.outdir}/3.FLASH/ -p {c}",shell=True)
-        subprocess.check_call(f'cd {args.outdir}/3.FLASH/ && zcat {c}.extendedFrags.fastq.gz {c}.notCombined*.gz >{c}.FLASH.fq',shell=True)
+        subprocess.check_call(f'cd {args.outdir}/3.FLASH/ && rm -rf {c}.FLASH.fq && cat {c}.*.fastq >{c}.FLASH.fq',shell=True)
         subprocess.check_call(f'mkdir -p {args.outdir}/4.cutadapt', shell=True)
         cutadapt =cmd+ (f"cutadapt -j 16 --match-read-wildcards --max-n 2 -g {forward} -a {reverse_forward_c} "
-                     f"--report=full --discard-untrimmed -o /outdir/4.cutadapt/{c}_no_primer.fastq.gz "
-                     f"{args.outdir}/3.FLASH/{c}.FLASH.fq\'")
+                     f"--report=full --discard-untrimmed -o /outdir/4.cutadapt/{c}_no_primer.fastq "
+                     f"/outdir/3.FLASH/{c}.FLASH.fq\'")
         subprocess.check_call(cutadapt, shell=True)
 
 else:
@@ -73,15 +76,15 @@ else:
         subprocess.check_call(f'mkdir -p {args.outdir}/3.FLASH/ && cp {args.outdir}/2.fastp/{c}.clean_R1.fastq >{args.outdir}/3.FLASH/{c}.FLASH.fq',shell=True)
         subprocess.check_call(f'mkdir -p {args.outdir}/4.cutadapt', shell=True)
         cutadapt =cmd+ (f"cutadapt -j 16 --match-read-wildcards --max-n 2 -g {forward} -a {reverse_forward_c} "
-                     f"--report=full --discard-untrimmed -o /outdir/4.cutadapt/{c}_no_primer.fastq.gz "
-                     f"{args.outdir}/3.FLASH/{c}.FLASH.fq\'")
+                     f"--report=full --discard-untrimmed -o /outdir/4.cutadapt/{c}_no_primer.fastq "
+                     f"/outdir/3.FLASH/{c}.FLASH.fq\'")
         subprocess.check_call(cutadapt, shell=True)
 
-subprocess.check_call(f'zcat {args.outdir}/4.cutadapt/*_no_primer.fastq.gz >{args.outdir}/4.cutadapt/all_no_primer.fastq.gz',shell=True)
+subprocess.check_call(f'cd {args.outdir}/4.cutadapt/ && rm -rf all_no_primer.fastq && cat *_no_primer.fastq >all_no_primer.fastq',shell=True)
 
 ####usearch
 subprocess.check_call(f'mkdir -p {args.outdir}/5.usearch',shell=True)
-qc=cmd+(f"usearch -fastq_filter /outdir/4.cutadapt/all_no_primer.fastq.gz -fastaout /outdir/5.usearch/all.filtered.fasta -fastq_maxee_rate 0.01 && "
+qc=cmd+(f"usearch -fastq_filter /outdir/4.cutadapt/all_no_primer.fastq -fastaout /outdir/5.usearch/all.filtered.fasta -fastq_maxee_rate 0.01 && "
     f"vsearch --derep_fulllength /outdir/5.usearch/all.filtered.fasta --output /outdir/5.usearch/all.uniques.fasta -relabel Uniq -sizeout --minuniquesize 10 && "
     f"usearch -unoise3 /outdir/5.usearch/all.uniques.fasta -zotus /outdir/5.usearch/all.zotu.fasta -tabbedout /outdir/5.usearch/all.unoise3.txt\'")
 subprocess.check_call(qc,shell=True)
@@ -89,7 +92,7 @@ subprocess.check_call(qc,shell=True)
 zmax_depth,zotu_counts=10000,{}
 if args.pe2!=None:
     for c in args.prefix.split(","):
-        table=cmd+(f"usearch -otutab /outdir/4.cutadapt/{c}_no_primer.fastq.gz -zotus /outdir/5.usearch/all.zotu.fasta -otutabout /outdir/5.usearch/{c}.zotutab.txt -mapout /outdir/5.usearch/{c}.zmap.txt\'")
+        table=cmd+(f"usearch -otutab /outdir/4.cutadapt/{c}_no_primer.fastq -zotus /outdir/5.usearch/all.zotu.fasta -otutabout /outdir/5.usearch/{c}.zotutab.txt -mapout /outdir/5.usearch/{c}.zmap.txt\'")
         print(table)
         subprocess.check_call(table,shell=True)
 
@@ -101,8 +104,8 @@ if args.pe2!=None:
                 array = line.split("\t")
                 zotu_counts[c][array[0]] = array[1]
         infile.close()
-        if int(subprocess.check_output(["wc -l", f"{args.outdir}/5.usearch/{c}.zmap.txt"]).split()[0]) >= zmax_depth:
-            zmax_depth = int(subprocess.check_output(["wc", "-l", f"{args.outdir}/{c}.map.txt"]).split()[0])
+        if int(subprocess.check_output(["wc", "-l", f"{args.outdir}/5.usearch/{c}.zmap.txt"]).split()[0]) >= zmax_depth:
+            zmax_depth = int(subprocess.check_output(["wc", "-l", f"{args.outdir}/5.usearch/{c}.zmap.txt"]).split()[0])
 #######################################################
 refs,db_name=[],[]
 if args.type=="16s_single":
@@ -112,31 +115,44 @@ if args.type=="16s_single":
     db_name.append("refseq")
     refs.append(os.path.abspath(args.greengene2))
     db_name.append("greengene2")
+    refs.append(os.path.abspath(args.efish))
+    db_name.append("efish")
+
 if args.type=="18s":
     refs.append(os.path.abspath(args.silva))
     db_name.append("silva")
     refs.append(os.path.abspath(args.refseq))
     db_name.append("refseq")
+    refs.append(os.path.abspath(args.efish))
+    db_name.append("efish")
+
 if args.type=="ITS":
     refs.append(os.path.abspath(args.ITS))
     db_name.append("ITS")
+
 if args.type=="CO1":
-    refs.append(os.path.abspath(args.CO1))
     db_name.append("CO1")
+    refs.append(os.path.abspath(args.CO1))
+
 if args.type=="12s":
     db_name.append("12s")
     refs.append(os.path.abspath(args.s12))
+
+    db_name.append("efish")
+    refs.append(os.path.abspath(args.efish))
 #######################################################
-tax,db_name={},[]
+tax={}
 for i in range(0,len(refs)):
-    ref_file = os.path.abspath(refs[i]).split("/")[-1]
-    taxonomy = f"docker run -v {args.outdir}/5.usearch/:/outdir/ -v {os.path.dirname(os.path.abspath(refs[i]))}:/ref/ {docker} sh -c \'export PATH=/opt/conda/envs/edna/bin/:$PATH && "
-    if not os.path.exists(f"{args.outdir}/all.zotu.qza"):
+    ref_file = refs[i].split("/")[-1]
+    print(ref_file)
+    taxonomy = f"docker run -v {args.outdir}/5.usearch/:/outdir/ -v {os.path.dirname(refs[i])}:/ref/ {docker} sh -c \'export PATH=/opt/conda/envs/edna/bin/:$PATH && "
+    if not os.path.exists(f"{args.outdir}/5.usearch/all.zotu.qza"):
         taxonomy += f"qiime tools import --type \'FeatureData[Sequence]\' --input-path /outdir/all.zotu.fasta --output-path /outdir/all.zotu.qza && "
-    taxonomy += (
-        f"qiime feature-classifier classify-sklearn --p-n-jobs 16 --p-confidence 0.8 --i-classifier /ref/{ref_file} --i-reads /outdir/all.zotu.qza --o-classification /outdir/all.zotu.{db_name[i]}.taxonomy.qza && "
-        f"qiime tools export --input-path /outdir/all.zotu.{db_name[i]}.taxonomy.qza --output-path /outdir/all.zotu.{db_name[i]}_taxonomy\'")
+    taxonomy+=(f"qiime feature-classifier classify-sklearn --p-n-jobs 16 --p-confidence 0.8 --i-classifier /ref/{ref_file} --i-reads /outdir/all.zotu.qza --o-classification /outdir/all.zotu.{db_name[i]}.taxonomy.qza && "
+               f"qiime tools export --input-path /outdir/all.zotu.{db_name[i]}.taxonomy.qza --output-path /outdir/all.zotu.{db_name[i]}_taxonomy\'")
+    print(taxonomy)
     subprocess.check_call(taxonomy, shell=True)
+    tax[db_name[i]]={}
     infile = open(f"{args.outdir}/5.usearch/all.zotu.{db_name[i]}_taxonomy/taxonomy.tsv", "r")
     for line in infile:
         line = line.strip("\n")
@@ -160,7 +176,7 @@ infile.close()
 #######################################################
 ##ZOTU
 sample_id=args.prefix.split(",")
-qiime_zotu_table=open(f"{args.outdir}/all_zotu_table.txt","w")
+qiime_zotu_table=open(f"{args.outdir}/5.usearch/all_zotu_table.txt","w")
 qiime_zotu_table.write(f"#ZOTUID")
 for i in range(0,len(sample_id)):
     qiime_zotu_table.write(f"\t{sample_id[i]}")
