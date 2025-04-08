@@ -4,7 +4,7 @@
 
 [Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
 
-## 2:Greengenes2 httpqs://ftp.microbio.me/greengenes_release/current/
+## 2:Greengenes2 https://ftp.microbio.me/greengenes_release/current/
 
 **\<version\>.backbone.v4.nb.qza**
 

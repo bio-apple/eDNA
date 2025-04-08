@@ -11,6 +11,8 @@ docker = "edna:latest"
 def run(indir,outdir,threshold,refseq=None,greengene2=None,silva=None):
     indir=os.path.abspath(indir)
     outdir = os.path.abspath(outdir)
+    if not os.path.exists(outdir):
+        subprocess.check_call(f'mkdir -p {outdir}',shell=True)
 
     cmd = (f"docker run -v {outdir}:/outdir -v {indir}:/raw_data/ "
            f"{docker} sh -c \'cd /outdir/ && export PATH=/opt/conda/envs/edna/bin:$PATH && ")
