@@ -58,7 +58,7 @@ https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-databas
 
 [Leray M, Knowlton N, Machida R J. MIDORI2: A collection of quality controlled, preformatted, and regularly updated reference databases for taxonomic assignment of eukaryotic mitochondrial sequences[J]. Environmental Dna, 2022, 4(4): 894-907.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.303)
  
-## 5.12s-18s-16s-CO1(only fish eDNA studies):https://zenodo.org/records/15028392 update:2025
+## 5.12s-18s-16s-CO1(only fish eDNA studies):https://zenodo.org/records/15028392 update:2025.03
 
     wget https://zenodo.org/records/15028392/files/12S-16S-18S-seqs.qza
     wget https://zenodo.org/records/15028392/files/12S-16S-18S-tax.qza
