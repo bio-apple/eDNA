@@ -75,12 +75,3 @@ https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-databas
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/mitofish_COI_sequences.qza --i-reference-taxonomy /ref/mitofish_COI_taxonomy.qza --o-classifier /ref/mitofish_COI-classifier.qza'
     
 [Lim S J, Thompson L R. Mitohelper: A mitochondrial reference sequence analysis tool for fish eDNA studies[J]. Environmental DNA, 2021, 3(4): 706-715.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.187)
-
-
-## other
-
-kraken2:SILVA 16s
-https://ftp.arb-silva.de **current version:138_2**
-
-    mkdir -p ref/kraken2/16S_SILVA138_2
-    docker run -v /staging/fanyucai/eDNA/ref/kraken2/16S_SILVA138_2:/ref/ edna sh -c 'export PATH=/opt/conda/bin:$PATH && sed -i s:138_1:138_2: /opt/conda/share/kraken2-2.1.3-4/libexec/16S_silva_installation.sh && kraken2-build --special silva --db /ref/ --threads 16 --kmer-len 51'
