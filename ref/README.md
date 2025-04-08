@@ -1,10 +1,6 @@
 # build reference database
 
-## 1.reference paper:https://github.com/bokulich-lab/RESCRIPt
-
-[Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
-
-## 2:Greengenes2 https://ftp.microbio.me/greengenes_release/current/
+## 1:Greengenes2 https://ftp.microbio.me/greengenes_release/current/
 
 **\<version\>.backbone.v4.nb.qza**
 
@@ -16,10 +12,9 @@
 
 [McDonald D, Jiang Y, Balaban M, et al. Greengenes2 unifies microbial data in a single reference tree[J]. Nature biotechnology, 2024, 42(5): 715-718.](https://www.nature.com/articles/s41587-023-01845-1)
 
-### 2-2:NCBI RefSeq Targeted Loci Project(16s+18s) with RESCRIPt
-https://www.ncbi.nlm.nih.gov/refseq/targetedloci/
+### 2:NCBI RefSeq Targeted Loci Project(16s+18s) https://www.ncbi.nlm.nih.gov/refseq/targetedloci/
 
-Using RESCRIPt to compile sequence databases and taxonomy classifiers from NCBI Genbank:https://forum.qiime2.org/t/using-rescript-to-compile-sequence-databases-and-taxonomy-classifiers-from-ncbi-genbank/15947
+Using RESCRIPt(https://github.com/bokulich-lab/RESCRIPt) to compile sequence databases and taxonomy classifiers from NCBI Genbank:https://forum.qiime2.org/t/using-rescript-to-compile-sequence-databases-and-taxonomy-classifiers-from-ncbi-genbank/15947
 
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-ncbi-data --p-query '33175[BioProject] OR 33317[BioProject] OR 39195[BioProject]' --o-sequences /ref/ncbi-refseqs-unfiltered.qza --o-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza"
     
@@ -27,14 +22,16 @@ Using RESCRIPt to compile sequence databases and taxonomy classifiers from NCBI 
 
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-taxa --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --m-ids-to-keep-file /ref/ncbi-refseqs.qza --o-filtered-taxonomy /ref/ncbi-refseqs-taxonomy.qza"    
 
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/ncbi-refseqs.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy.qza --o-classifier /ref/ncbi-refseqs-classifier.qza --o-evaluation /ref/ncbi-refseqs-classifier-evaluation.qzv --o-observed-taxonomy /ref/ncbi-refseqs-predicted-taxonomy.qza"
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/ncbi-refseqs.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy.qza --o-classifier /ref/ncbi-refseqs-classifier.qza"
 
-## 3:Processing, filtering, and evaluating the SILVA database (and other reference sequence data) with RESCRIPt
-https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494
+[Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
 
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-silva-data --p-version '138.2' --p-target 'SSURef_NR99' --o-silva-sequences /ref/silva-138.2-ssu-nr99-rna-seqs.qza --o-silva-taxonomy /ref/silva-138.2-ssu-nr99-tax.qza"
+## 3:Processing, filtering, and evaluating the SILVA database (and other reference sequence data) with RESCRIPt:https://docs.qiime2.org/2024.10/data-resources/
     
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript reverse-transcribe --i-rna-sequences /ref/silva-138.2-ssu-nr99-rna-seqs.qza --o-dna-sequences /ref/silva-138.2-ssu-nr99-seqs.qza"
+    wget https://data.qiime2.org/2024.10/common/silva-138-99-seqs.qza
+    wget https://data.qiime2.org/2024.10/common/silva-138-99-tax.qza
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/silva-138-99-seqs.qza --i-taxonomy /ref/silva-138-99-tax.qza --o-classifier /ref/silva-138.2-ssu-nr99-classifier.qza"
+
 
 ## 4.MIDORI2(12s and CO1):https://reference-midori.info
     
