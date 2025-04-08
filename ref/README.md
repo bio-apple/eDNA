@@ -26,7 +26,7 @@ Using RESCRIPt to compile sequence databases and taxonomy classifiers from NCBI 
 
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-ncbi-data --p-query '33175[BioProject] OR 33317[BioProject] OR 39195[BioProject]' --o-sequences /ref/ncbi-refseqs-unfiltered.qza --o-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza"
     
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-seqs-length-by-taxon --i-sequences /ref/ncbi-refseqs-unfiltered.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --p-labels Archaea Bacteria --p-min-lens 900 1200 --o-filtered-seqs /ref/ncbi-refseqs.qza --o-discarded-seqs /ref/ncbi-refseqs-tooshort.qza"
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-seqs-length-by-taxon --i-sequences /ref/ncbi-refseqs-unfiltered.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --p-labels Archaea Bacteria Eukaryota --p-min-lens 900 1200 1400 --o-filtered-seqs /ref/ncbi-refseqs.qza --o-discarded-seqs /ref/ncbi-refseqs-tooshort.qza"
 
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-taxa --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --m-ids-to-keep-file /ref/ncbi-refseqs.qza --o-filtered-taxonomy /ref/ncbi-refseqs-taxonomy.qza"    
 
