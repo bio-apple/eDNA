@@ -12,27 +12,15 @@
 
 [McDonald D, Jiang Y, Balaban M, et al. Greengenes2 unifies microbial data in a single reference tree[J]. Nature biotechnology, 2024, 42(5): 715-718.](https://www.nature.com/articles/s41587-023-01845-1)
 
-### 2:NCBI RefSeq Targeted Loci Project(16s+18s) https://www.ncbi.nlm.nih.gov/refseq/targetedloci/
+## 2:NCBI RefSeq Targeted Loci Project(https://www.ncbi.nlm.nih.gov/refseq/targetedloci/) and SILVA(https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494)
 
-Using RESCRIPt(https://github.com/bokulich-lab/RESCRIPt) to compile sequence databases and taxonomy classifiers from NCBI Genbank:https://forum.qiime2.org/t/using-rescript-to-compile-sequence-databases-and-taxonomy-classifiers-from-ncbi-genbank/15947
-
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript get-ncbi-data --p-query '33175[BioProject] OR 33317[BioProject] OR 39195[BioProject]' --o-sequences /ref/ncbi-refseqs-unfiltered.qza --o-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza"
-    
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-seqs-length-by-taxon --i-sequences /ref/ncbi-refseqs-unfiltered.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --p-labels Archaea Bacteria Eukaryota --p-min-lens 900 1200 1400 --o-filtered-seqs /ref/ncbi-refseqs.qza --o-discarded-seqs /ref/ncbi-refseqs-tooshort.qza"
-
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript filter-taxa --i-taxonomy /ref/ncbi-refseqs-taxonomy-unfiltered.qza --m-ids-to-keep-file /ref/ncbi-refseqs.qza --o-filtered-taxonomy /ref/ncbi-refseqs-taxonomy.qza"    
-
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/ncbi-refseqs.qza --i-taxonomy /ref/ncbi-refseqs-taxonomy.qza --o-classifier /ref/ncbi-refseqs-classifier.qza"
+RESCRIPt(REference Sequence annotation and CuRatIon Pipeline,https://github.com/bokulich-lab/RESCRIPt) is a python package and QIIME 2 plugin for formatting, managing, and manipulating sequence reference databases. 
 
 [Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
 
-## 3:Processing, filtering, and evaluating the SILVA database (and other reference sequence data) with RESCRIPt:https://docs.qiime2.org/2024.10/data-resources/
-    
-    wget https://data.qiime2.org/2024.10/common/silva-138-99-seqs.qza
-    wget https://data.qiime2.org/2024.10/common/silva-138-99-tax.qza
-    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript evaluate-fit-classifier --i-sequences /ref/silva-138-99-seqs.qza --i-taxonomy /ref/silva-138-99-tax.qza --o-classifier /ref/silva-138.2-ssu-nr99-classifier.qza"
+    python3 qiime_NCBI-silva.py -v 138.2 -o /ref/qiime/
 
-## 4.MIDORI2(12s and CO1):https://reference-midori.info
+## 3.MIDORI2(12s and CO1):https://reference-midori.info
     
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz
@@ -51,7 +39,7 @@ Using RESCRIPt(https://github.com/bokulich-lab/RESCRIPt) to compile sequence dat
 
 [Leray M, Knowlton N, Machida R J. MIDORI2: A collection of quality controlled, preformatted, and regularly updated reference databases for taxonomic assignment of eukaryotic mitochondrial sequences[J]. Environmental Dna, 2022, 4(4): 894-907.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.303)
  
-## 5.12s-18s-16s-CO1(only fish eDNA studies):https://zenodo.org/records/15028392 update:2025.03
+## 4.12s-18s-16s-CO1(only fish eDNA studies):https://zenodo.org/records/15028392 update:2025.03
 
     wget https://zenodo.org/records/15028392/files/12S-16S-18S-seqs.qza
     wget https://zenodo.org/records/15028392/files/12S-16S-18S-tax.qza
