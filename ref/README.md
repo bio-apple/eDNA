@@ -1,4 +1,4 @@
-# build reference database
+# Reference database
 
 1.  Greengenes2 https://ftp.microbio.me/greengenes_release/current/
 
@@ -14,9 +14,9 @@
 
 2.  NCBI RefSeq Targeted Loci Project(https://www.ncbi.nlm.nih.gov/refseq/targetedloci/) and SILVA(https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494)
 
-RESCRIPt(REference Sequence annotation and CuRatIon Pipeline,https://github.com/bokulich-lab/RESCRIPt) is a python package and QIIME 2 plugin for formatting, managing, and manipulating sequence reference databases. 
+ RESCRIPt(REference Sequence annotation and CuRatIon Pipeline,https://github.com/bokulich-lab/RESCRIPt) is a python package and QIIME 2 plugin for formatting, managing, and manipulating sequence reference databases. 
 
-[Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
+ [Robeson M S, O’Rourke D R, Kaehler B D, et al. RESCRIPt: Reproducible sequence taxonomy reference database management[J]. PLoS computational biology, 2021, 17(11): e1009581.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009581)
 
     python3 qiime_NCBI-silva.py -v 138.2 -o /ref/qiime/
 
