@@ -36,7 +36,7 @@ https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-databas
     
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref/ edna sh -c "export PATH=/opt/conda/envs/edna/bin:$PATH && qiime rescript reverse-transcribe --i-rna-sequences /ref/silva-138.2-ssu-nr99-rna-seqs.qza --o-dna-sequences /ref/silva-138.2-ssu-nr99-seqs.qza"
 
-## 4.12s and CO1
+## 4.MIDORI2(12s and CO1):https://reference-midori.info
     
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.fasta.gz
     wget https://reference-midori.info/download/Databases/GenBank264_2024-12-14/QIIME/longest/MIDORI2_LONGEST_NUC_GB264_srRNA_QIIME.taxon.gz
