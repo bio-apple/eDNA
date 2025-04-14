@@ -137,7 +137,7 @@ def run(indir,outdir,threshold,refseq=None,greengene2=None,silva=None):
                 qiime_ASV_table.write(f"\t{tax[db_name[i]][array[0]]}")
         else:
             for i in range(0,len(db_name)):
-                qiime_ASV_table.write(f"\t{db_name[i]}\tTaxon\tConfidence")
+                qiime_ASV_table.write(f"\t{db_name[i]}_Taxon\tConfidence")
         qiime_ASV_table.write("\n")
         num+=1
     asv.close()

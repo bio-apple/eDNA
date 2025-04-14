@@ -153,7 +153,7 @@ sample_id=args.prefix.split(",")
 for i in range(0,len(sample_id)):
     qiime_otu_table.write(f"\t{sample_id[i]}")
 for i in range(0,len(db_name)):
-    qiime_otu_table.write(f"\t{db_name[i]}\tTaxon\tConfidence")
+    qiime_otu_table.write(f"\t{db_name[i]}_Taxon\tConfidence")
 
 for i in range(0,len(otu_id)):
     qiime_otu_table.write(f"\n{otu_id[i]}")
@@ -170,7 +170,7 @@ qiime_zotu_table.write(f"#ZOTUID")
 for i in range(0,len(sample_id)):
     qiime_zotu_table.write(f"\t{sample_id[i]}")
 for i in range(0,len(db_name)):
-    qiime_zotu_table.write(f"\t{db_name[i]}\tTaxon\tConfidence")
+    qiime_zotu_table.write(f"\t{db_name[i]}_Taxon\tConfidence")
 
 for i in range(0,len(zotu_id)):
     qiime_zotu_table.write(f"\n{zotu_id[i]}")

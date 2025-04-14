@@ -67,15 +67,29 @@ The data flow diagram is as follows
 **16s rRNA pair-end**
 
     python3 script/fastqc.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -o outdir/1.fastqc/
+    python3 script/fastqc.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -o outdir/1.fastqc/
 
+    python3 script/fastp.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -p ERR2730388 -o outdir/2.fastp/
     python3 script/fastp.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
 
+    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730388.clean_R1.fastq -p2 outdir/2.fastp/ERR2730388.clean_R2.fastq -p ERR2730388
     python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730395.clean_R1.fastq -p2 outdir/2.fastp/ERR2730395.clean_R2.fastq -p ERR2730395
-
+    
     python3 script/dada2.py -s ref/silva-138.2-ssu-nr99-classifier.qza -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza -i outdir/3.cutadapt/ -o outdir/4.dada2/
-
     python3 script/usearch.py -p1 outdir/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R1.fastq.gz -p2 outdir/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R2.fastq.gz -p ERR2730388,ERR2730391 -o outdir/test/ -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza
 
-**18s rRNA/12s rRNA/CO1/ITS**
+**other:12s**
 
-  
+    python3 script/other.py -p1 test_data/12s/DRR030411_1.fastq,test_data/12s/DRR030422_1.fastq -p2 test_data/12s/DRR030411_2.fastq,test_data/12s/DRR030422_2.fastq -p DRR030411,DRR030422 -n 12s_rRNA_MiFish-U_MiFish-L -m script/primer.tsv -t 12s -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -o outdir/12s -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza
+
+**other:CO1**
+
+    python3 script/other.py -p1 test_data/CO1/SRR9185140_1.fastq,test_data/CO1/SRR9185142_1.fastq -p2 test_data/CO1/SRR9185140_2.fastq,test_data/CO1/SRR9185142_2.fastq -p SRR9185140,SRR9185142 -n BF2R2 -m script/primer.tsv -t CO1 -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -o outdir/CO1 -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza
+
+**other:16s rRNA**
+
+    python3 script/other.py -p1 test_data/16s/ERR2730388_1.fastq,test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730388_2.fastq,test_data/16s/ERR2730395_2.fastq -p ERR2730388,ERR2730395 -n 16s_rRNA_V3-v4_341F-785R -m script/primer.tsv -t 16s_single -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -o outdir/16s -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza
+
+**other:18s rRNA**
+
+    python3 script/other.py -p1 test_data/18s/v9/SRR12793466_1.fastq,test_data/18s/v9/SRR12793467_1.fastq -p2 test_data/18s/v9/SRR12793466_2.fastq,test_data/18s/v9/SRR12793467_2.fastq -p SRR12793466,SRR12793467 -n 18s_rRNA_V9_1380F-1510R -m script/primer.tsv -t 18s -o outdir/18s -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza

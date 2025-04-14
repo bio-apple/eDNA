@@ -10,12 +10,13 @@ parser.add_argument("-p1", "--pe1", help="several R1 fastq files,split by comma"
 parser.add_argument("-p2", "--pe2", help="several R2 fastq files,split by comma",default=None)
 parser.add_argument("-p", "--prefix", help="prefix of output files,split by comma", required=True)
 parser.add_argument("-o", "--outdir", help="output directory", required=True)
-parser.add_argument("-t","--type",help="type of data",choices=["16s_single","18s","ITS","CO1","12s",'efish'],required=True)
+parser.add_argument("-t","--type",help="type of data",choices=["16s_single","18s","ITS","CO1","12s"],required=True)
 parser.add_argument("-r","--refseq",help="refseq qiime classify file",required=True)
 parser.add_argument("-s","--silva",help="silva qiime classify file",required=True)
 parser.add_argument("-g","--greengene2",help="greengene2 qiime classify file",required=True)
 parser.add_argument("-i","--ITS",help="ITS qiime classify file",required=True)
-parser.add_argument("-e","--efish",help="database:edna-fish-12S-16S-18S")
+parser.add_argument("-rfish","--rfish",help="database:edna-fish-12S-16S-18S")
+parser.add_argument("-cfish","--cfish",help="co1 efish")
 parser.add_argument("-c","--CO1",help="CO1 qiime classify file",required=True)
 parser.add_argument("-s12","--s12",help="12s rRNA qiime classify file",required=True)
 parser.add_argument("-m","--primer",help="primer file",required=True)
@@ -115,16 +116,16 @@ if args.type=="16s_single":
     db_name.append("refseq")
     refs.append(os.path.abspath(args.greengene2))
     db_name.append("greengene2")
-    refs.append(os.path.abspath(args.efish))
-    db_name.append("efish")
+    refs.append(os.path.abspath(args.rfish))
+    db_name.append("edna-fish-12S-16S-18S")
 
 if args.type=="18s":
     refs.append(os.path.abspath(args.silva))
     db_name.append("silva")
     refs.append(os.path.abspath(args.refseq))
     db_name.append("refseq")
-    refs.append(os.path.abspath(args.efish))
-    db_name.append("efish")
+    refs.append(os.path.abspath(args.rfish))
+    db_name.append("edna-fish-12S-16S-18S")
 
 if args.type=="ITS":
     refs.append(os.path.abspath(args.ITS))
@@ -133,13 +134,15 @@ if args.type=="ITS":
 if args.type=="CO1":
     db_name.append("CO1")
     refs.append(os.path.abspath(args.CO1))
+    db_name.append("mitofish.COI")
+    refs.append(os.path.abspath(args.cfish))
 
 if args.type=="12s":
     db_name.append("12s")
     refs.append(os.path.abspath(args.s12))
 
-    db_name.append("efish")
-    refs.append(os.path.abspath(args.efish))
+    db_name.append("edna-fish-12S-16S-18S")
+    refs.append(os.path.abspath(args.rfish))
 #######################################################
 tax={}
 for i in range(0,len(refs)):
@@ -181,7 +184,7 @@ qiime_zotu_table.write(f"#ZOTUID")
 for i in range(0,len(sample_id)):
     qiime_zotu_table.write(f"\t{sample_id[i]}")
 for i in range(0,len(db_name)):
-    qiime_zotu_table.write(f"\t{db_name[i]}\tTaxon\tConfidence")
+    qiime_zotu_table.write(f"\t{db_name[i]}_Taxon\tConfidence")
 
 for i in range(0,len(zotu_id)):
     qiime_zotu_table.write(f"\n{zotu_id[i]}")

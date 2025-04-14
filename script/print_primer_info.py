@@ -1,7 +1,7 @@
 import os
 import sys
 
-with open("../script/primer.tsv", "w") as primer_tsv:
+with open("primer.tsv", "w") as primer_tsv:
     primer_tsv.write("Name\tForward\tReverse\tAmplicon_max_Length(bp)\n")
     primer_tsv.write("12s_rRNA_MiFish-U_MiFish-L\t"
                      "GTCGGTAAAACTCGTGCCAGC\t"
@@ -132,3 +132,8 @@ with open("../script/primer.tsv", "w") as primer_tsv:
                          "GGWACWGGWTGAACWGTWTAYCCYCC\t"
                          "TAAACTTCAGGGTGACCAAARAAYCA\t"
                          "313\n")
+
+    primer_tsv.write("BF2R2\t"
+                         "ACWGGWTGRACWGTNTAYCC\t"
+                         "TCDGGRTGNCCRAARAAYCA\t"
+                         "421\n")
