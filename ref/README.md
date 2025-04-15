@@ -54,3 +54,7 @@
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/mitofish_COI_sequences.qza --i-reference-taxonomy /ref/mitofish_COI_taxonomy.qza --o-classifier /ref/mitofish_COI-classifier.qza'
     
 [Lim S J, Thompson L R. Mitohelper: A mitochondrial reference sequence analysis tool for fish eDNA studies[J]. Environmental DNA, 2021, 3(4): 706-715.](https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.187)
+
+## 5.[ITS](https://github.com/colinbrislawn/unite-train) update:2025.02.19
+
+    wget https://github.com/colinbrislawn/unite-train/archive/refs/tags/v10.0-2025-02-19-qiime2-2024.10.tar.gz
