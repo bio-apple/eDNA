@@ -53,12 +53,12 @@ The data flow diagram is as follows:
 
 ### prepare 
 
-**docker images**
+**step1:docker images**
 
     cd Docker/
     docker build -t edna ./
 
-**[refernce](./ref/README.md)**
+**[step2:build database](./ref/README.md)**
 
 ### The example command is as follows
 
