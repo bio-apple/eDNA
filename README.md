@@ -48,19 +48,16 @@ kraken2:SILVA 16s https://ftp.arb-silva.de **current version:138_2**
 
 The data flow diagram is as follows:
 
-
 ![flow-chart](./16s_rRNA.jpg)
 
-### prepare 
-
-**step1:docker images**
+### step1:docker images**
 
     cd Docker/
     docker build -t edna ./
 
-**[step2:build database](./ref/README.md)**
+### [step2:build database](./ref/README.md)
 
-### step3:The example command is as follows
+### step3:The example command is as follows:
 
 **16s rRNA pair-end**
 
