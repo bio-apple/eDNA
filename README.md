@@ -50,7 +50,7 @@ The data flow diagram is as follows:
 
 ![flow-chart](./16s_rRNA.jpg)
 
-### step1:docker images**
+### step1:docker images
 
     cd Docker/
     docker build -t edna ./
