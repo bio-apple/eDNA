@@ -60,7 +60,7 @@ The data flow diagram is as follows:
 
 **[step2:build database](./ref/README.md)**
 
-### The example command is as follows
+### step3:The example command is as follows
 
 **16s rRNA pair-end**
 
