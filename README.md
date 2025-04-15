@@ -43,7 +43,6 @@ kraken2:SILVA 16s https://ftp.arb-silva.de **current version:138_2**
 
 [Lu J, Salzberg S L. Ultrafast and accurate 16S rRNA microbial community analysis using Kraken 2[J]. Microbiome, 2020, 8(1): 124.](https://link.springer.com/article/10.1186/S40168-020-00900-2)
 
-
 ## Bioinformatics Pipeline
 
 The data flow diagram is as follows:
