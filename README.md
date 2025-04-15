@@ -59,13 +59,13 @@ The data flow diagram is as follows:
 
 ### step3:The example command is as follows:
 
-**16s rRNA pair-end**
+**16s rRNA(advice)**
 
-    python3 script/fastqc.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -o outdir/1.fastqc/
-    python3 script/fastqc.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -o outdir/1.fastqc/
+    python3 script/fastqc.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -o outdir/1.fastqc/
+    python3 script/fastqc.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -o outdir/1.fastqc/
 
-    python3 script/fastp.py -p1 test_data/ERR2730388_1.fastq -p2 test_data/ERR2730388_2.fastq -p ERR2730388 -o outdir/2.fastp/
-    python3 script/fastp.py -p1 test_data/ERR2730395_1.fastq -p2 test_data/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
+    python3 script/fastp.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -p ERR2730388 -o outdir/2.fastp/
+    python3 script/fastp.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
 
     python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730388.clean_R1.fastq -p2 outdir/2.fastp/ERR2730388.clean_R2.fastq -p ERR2730388
     python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730395.clean_R1.fastq -p2 outdir/2.fastp/ERR2730395.clean_R2.fastq -p ERR2730395
