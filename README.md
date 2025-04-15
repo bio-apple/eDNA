@@ -57,7 +57,9 @@ The data flow diagram is as follows:
 
 ### [step2:build database](./ref/README.md)
 
-### step3:The example command is as follows:
+### step3:[demo data](./test_data/README.md) based on your needs for analysis.
+
+### step4:The example command is as follows:
 
 **16s rRNA pair-end(advice)**
 
