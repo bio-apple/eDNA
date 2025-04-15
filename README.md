@@ -58,10 +58,7 @@ The data flow diagram is as follows:
     cd Docker/
     docker build -t edna ./
 
-**refernce**
-
-    mkdir ref/
-    python3 script/qiime_12s_16s-18s_ITS_CO1.py -v 138.2 -o ref/
+**[refernce](./ref/README.md)**
 
 ### The example command is as follows
 
