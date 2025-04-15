@@ -59,7 +59,7 @@ The data flow diagram is as follows:
 
 ### step3:The example command is as follows:
 
-**16s rRNA(advice)**
+**16s rRNA pair-end(advice)**
 
     python3 script/fastqc.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -o outdir/1.fastqc/
     python3 script/fastqc.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -o outdir/1.fastqc/
