@@ -30,4 +30,14 @@
     #v4
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12793385
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12793390
-    
+
+# ITS
+
+**NCBI SRA #PRJNA1055419**
+
+    #primer:ITS4_ILL and gITS7_ILL   
+
+    sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR30683883
+    sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR30683886
+
+[Rzehak T, Praeg N, Galla G, et al. Comparison of commonly used software pipelines for analyzing fungal metabarcoding data[J]. BMC genomics, 2024, 25(1): 1085.](https://link.springer.com/article/10.1186/s12864-024-11001-x)
