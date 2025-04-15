@@ -94,4 +94,4 @@ The data flow diagram is as follows:
 
 **other:ITS**
 
-    
+    python3 script/other.py -p1 test_data/ITS/SRR30683883_1.fastq,test_data/ITS/SRR30683886_1.fastq -p2 test_data/ITS/SRR30683883_2.fastq,test_data/ITS/SRR30683886_2.fastq -p SRR30683883,SRR30683886 -n ITS2_ITS7-ITS4 -m script/primer.tsv -t ITS -o outdir/ITS -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza
