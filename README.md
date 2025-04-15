@@ -46,7 +46,8 @@ kraken2:SILVA 16s https://ftp.arb-silva.de **current version:138_2**
 
 ## Bioinformatics Pipeline
 
-The data flow diagram is as follows
+The data flow diagram is as follows:
+
 
 ![flow-chart](./16s_rRNA.jpg)
 
