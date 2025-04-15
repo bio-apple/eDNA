@@ -57,7 +57,7 @@ The data flow diagram is as follows:
 
 ### [step2:build database](./ref/README.md)
 
-### step3:[demo data](./test_data/README.md) based on your needs for analysis.
+### step3:download [demo data](./test_data/README.md) as you needed
 
 ### step4:The example command is as follows:
 
