@@ -10,7 +10,7 @@ parser.add_argument("-p1", "--pe1", help="several R1 fastq files,split by comma"
 parser.add_argument("-p2", "--pe2", help="several R2 fastq files,split by comma",default=None)
 parser.add_argument("-p", "--prefix", help="prefix of output files,split by comma", required=True)
 parser.add_argument("-o", "--outdir", help="output directory", required=True)
-parser.add_argument("-t","--type",help="type of data",choices=["16s_single","18s","ITS","CO1","12s"],required=True)
+parser.add_argument("-t","--type",help="type of data",choices=["16s","18s","ITS","CO1","12s"],required=True)
 parser.add_argument("-r","--refseq",help="refseq qiime classify file",required=True)
 parser.add_argument("-s","--silva",help="silva qiime classify file",required=True)
 parser.add_argument("-g","--greengene2",help="greengene2 qiime classify file",required=True)
@@ -109,7 +109,7 @@ if args.pe2!=None:
             zmax_depth = int(subprocess.check_output(["wc", "-l", f"{args.outdir}/5.usearch/{c}.zmap.txt"]).split()[0])
 #######################################################
 refs,db_name=[],[]
-if args.type=="16s_single":
+if args.type=="16s":
     refs.append(os.path.abspath(args.silva))
     db_name.append("silva")
     refs.append(os.path.abspath(args.refseq))

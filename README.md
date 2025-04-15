@@ -61,17 +61,17 @@ The data flow diagram is as follows:
 
 **16s rRNA pair-end(advice)**
 
-    python3 script/fastqc.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -o outdir/1.fastqc/
-    python3 script/fastqc.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -o outdir/1.fastqc/
+    python3 script/fastqc.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -o outdir/16s_advice/1.fastqc/
+    python3 script/fastqc.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -o outdir/16s_advice/1.fastqc/
 
-    python3 script/fastp.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -p ERR2730388 -o outdir/2.fastp/
-    python3 script/fastp.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -p ERR2730395 -o outdir/2.fastp/
+    python3 script/fastp.py -p1 test_data/16s/ERR2730388_1.fastq -p2 test_data/16s/ERR2730388_2.fastq -p ERR2730388 -o outdir/16s_advice/2.fastp/
+    python3 script/fastp.py -p1 test_data/16s/ERR2730395_1.fastq -p2 test_data/16s/ERR2730395_2.fastq -p ERR2730395 -o outdir/16s_advice/2.fastp/
 
-    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730388.clean_R1.fastq -p2 outdir/2.fastp/ERR2730388.clean_R2.fastq -p ERR2730388
-    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/3.cutadapt/ -p1 outdir/2.fastp/ERR2730395.clean_R1.fastq -p2 outdir/2.fastp/ERR2730395.clean_R2.fastq -p ERR2730395
+    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/16s_advice/3.cutadapt/ -p1 outdir/16s_advice/2.fastp/ERR2730388.clean_R1.fastq -p2 outdir/16s_advice/2.fastp/ERR2730388.clean_R2.fastq -p ERR2730388
+    python3 script/cutadapt.py -n 16s_rRNA_V3-v4_341F-785R -r script/primer.tsv -l 300 -o outdir/16s_advice/3.cutadapt/ -p1 outdir/16s_advice/2.fastp/ERR2730395.clean_R1.fastq -p2 outdir/16s_advice/2.fastp/ERR2730395.clean_R2.fastq -p ERR2730395
     
-    python3 script/dada2.py -s ref/silva-138.2-ssu-nr99-classifier.qza -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza -i outdir/3.cutadapt/ -o outdir/4.dada2/
-    python3 script/usearch.py -p1 outdir/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R1.fastq.gz -p2 outdir/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/3.cutadapt/ERR2730391_no_primer_R2.fastq.gz -p ERR2730388,ERR2730391 -o outdir/test/ -g ref/2024.09.backbone.full-length.nb.qza -r ref/ncbi-refseqs-classifier.qza
+    python3 script/dada2.py -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -g ref/qiime/2024.09.backbone.full-length.nb.qza -r ref/qiime/ncbi-refseqs-classifier.qza -i outdir/16s_advice/3.cutadapt/ -o outdir/16s_advice/4.dada2/
+    python3 script/usearch.py -p1 outdir/16s_advice/3.cutadapt/ERR2730388_no_primer_R1.fastq.gz,outdir/16s_advice/3.cutadapt/ERR2730395_no_primer_R1.fastq.gz -p2 outdir/16s_advice/3.cutadapt/ERR2730388_no_primer_R2.fastq.gz,outdir/16s_advice/3.cutadapt/ERR2730395_no_primer_R2.fastq.gz -p ERR2730388,ERR2730395 -o outdir/16s_advice/5.usearch -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -g ref/qiime/2024.09.backbone.full-length.nb.qza -r ref/qiime/ncbi-refseqs-classifier.qza
 
 **other:12s**
 
