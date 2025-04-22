@@ -42,3 +42,15 @@
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR30683883
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR30683886
 [Rzehak T, Praeg N, Galla G, et al. Comparison of commonly used software pipelines for analyzing fungal metabarcoding data[J]. BMC genomics, 2024, 25(1): 1085.](https://link.springer.com/article/10.1186/s12864-024-11001-x)
+
+
+# rbcL
+
+**NCBI SRA #PRJNA650007**
+
+    #primer:rbcL2-F and rbcLa-R primers
+    
+    sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12374561
+    sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12374563
+
+[Urumarudappa S K J, Tungphatthong C, Prombutara P, et al. DNA metabarcoding to unravel plant species composition in selected herbal medicines on the National List of Essential Medicines (NLEM) of Thailand[J]. Scientific Reports, 2020, 10(1): 18259.](https://www.nature.com/articles/s41598-020-75305-0)
