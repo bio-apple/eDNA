@@ -58,3 +58,7 @@
 ## 5.[ITS](https://github.com/colinbrislawn/unite-train) update:2025.02.19
 
     wget https://github.com/colinbrislawn/unite-train/archive/refs/tags/v10.0-2025-02-19-qiime2-2024.10.tar.gz
+
+## 6.[plant reference databases dedicated to ITS2 and rbcL](https://doi.org/10.6084/m9.figshare.17040680) update:2024-11-13
+
+[Dubois B, Debode F, Hautier L, et al. A detailed workflow to develop QIIME2-formatted reference databases for taxonomic analysis of DNA metabarcoding data[J]. BMC Genomic Data, 2022, 23(1): 53.](https://bmcgenomdata.biomedcentral.com/articles/10.1186/s12863-022-01067-5)
