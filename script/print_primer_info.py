@@ -137,3 +137,8 @@ with open("primer.tsv", "w") as primer_tsv:
                          "ACWGGWTGRACWGTNTAYCC\t"
                          "TCDGGRTGNCCRAARAAYCA\t"
                          "421\n")
+
+    primer_tsv.write("rbcL2-F_rbcLa-R\t"
+                         "ATGTCACCACAAACAGAAAC\t"
+                         "AAGCTTTTCCATTACTGCC\t"
+                         "500\n")
