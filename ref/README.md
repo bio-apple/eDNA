@@ -65,9 +65,9 @@
 
 [Dubois B, Debode F, Hautier L, et al. A detailed workflow to develop QIIME2-formatted reference databases for taxonomic analysis of DNA metabarcoding data[J]. BMC Genomic Data, 2022, 23(1): 53.](https://bmcgenomdata.biomedcentral.com/articles/10.1186/s12863-022-01067-5)
 
-## 7.[EUKARYOME](https://eukaryome.org/)
+## 7.[EUKARYOME](https://eukaryome.org/) Release 1.9.4 update:2025-03-17
 
-EUKARYOME is a community-curated research database for nuclear ribosomal 18S rRNA (SSU), internal transcribed spacer (ITS), and 28S rRNA (LSU) markers for all eukaryotes.
+EUKARYOME: is a community-curated research database for nuclear ribosomal 18S rRNA (SSU), internal transcribed spacer (ITS), and 28S rRNA (LSU) markers for all eukaryotes.
 
     #18s
     docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/QIIME2_EUK_SSU_v1.9.4.fasta --output-path /ref/eukaryome_18s_sequences.qza'
