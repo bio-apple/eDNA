@@ -139,6 +139,6 @@ with open("primer.tsv", "w") as primer_tsv:
                          "421\n")
 
     primer_tsv.write("rbcL2-F_rbcLa-R\t"
-                         "ATGTCACCACAAACAGAAAC\t"
-                         "AAGCTTTTCCATTACTGCC\t"
+                         "TGGCAGCATTCGAGTAACTC\t"
+                         "CTTCTGCTACAAATAAGAATCGATCTC\t"
                          "500\n")

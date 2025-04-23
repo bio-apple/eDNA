@@ -61,4 +61,6 @@
 
 ## 6.[DB4Q2:plant reference databases dedicated to ITS2 and rbcL](https://doi.org/10.6084/m9.figshare.17040680) update:2024-11-13
 
+    docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/NCBI_rbcL_Viridiplantae_fasta_file_2021_06_14.qza --i-reference-taxonomy /ref/NCBI_rbcL_Viridiplantae_taxonomic_lineages_2021_06_14.qza --o-classifier /ref/NCBI_rbcL_Viridiplantae_classifier_2021_06_14.qza'
+
 [Dubois B, Debode F, Hautier L, et al. A detailed workflow to develop QIIME2-formatted reference databases for taxonomic analysis of DNA metabarcoding data[J]. BMC Genomic Data, 2022, 23(1): 53.](https://bmcgenomdata.biomedcentral.com/articles/10.1186/s12863-022-01067-5)
