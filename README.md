@@ -80,7 +80,7 @@ The data flow diagram is as follows:
 
 **other:CO1**
 
-    python3 script/other.py -p1 test_data/CO1/SRR9185140_1.fastq,test_data/CO1/SRR9185142_1.fastq -p2 test_data/CO1/SRR9185140_2.fastq,test_data/CO1/SRR9185142_2.fastq -p SRR9185140,SRR9185142 -n BF2R2 -m script/primer.tsv -t CO1 -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -o outdir/CO1 -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza -rbcL /staging/fanyucai/eDNA/ref/qiime/NCBI_rbcL_Viridiplantae_classifier_2021_06_14.qza
+    python3 script/other.py -p1 test_data/CO1/SRR9185140_1.fastq,test_data/CO1/SRR9185142_1.fastq -p2 test_data/CO1/SRR9185140_2.fastq,test_data/CO1/SRR9185142_2.fastq -p SRR9185140,SRR9185142 -n CO1_BF2R2 -m script/primer.tsv -t CO1 -g ref/qiime/2024.09.backbone.full-length.nb.qza -s12 ref/qiime/midori2-12s-classifier.qza -c ref/qiime/midori2-coi-classifier.qza -rfish ref/qiime/edna-fish-12S-16S-18S-classifier.qza -o outdir/CO1 -r ref/qiime/ncbi-refseqs-classifier.qza -s ref/qiime/silva-138.2-ssu-nr99-classifier.qza -i ref/qiime/unite_ver10_dynamic_s_all_19.02.2025-Q2-2024.10.qza -cfish ref/qiime/mitofish_COI-classifier.qza -rbcL /staging/fanyucai/eDNA/ref/qiime/NCBI_rbcL_Viridiplantae_classifier_2021_06_14.qza
 
 **other:16s rRNA**
 

@@ -64,3 +64,24 @@
     docker run -v /staging/fanyucai/eDNA/ref/qiime:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/NCBI_rbcL_Viridiplantae_fasta_file_2021_06_14.qza --i-reference-taxonomy /ref/NCBI_rbcL_Viridiplantae_taxonomic_lineages_2021_06_14.qza --o-classifier /ref/NCBI_rbcL_Viridiplantae_classifier_2021_06_14.qza'
 
 [Dubois B, Debode F, Hautier L, et al. A detailed workflow to develop QIIME2-formatted reference databases for taxonomic analysis of DNA metabarcoding data[J]. BMC Genomic Data, 2022, 23(1): 53.](https://bmcgenomdata.biomedcentral.com/articles/10.1186/s12863-022-01067-5)
+
+## 7.[EUKARYOME](https://eukaryome.org/)
+
+EUKARYOME is a community-curated research database for nuclear ribosomal 18S rRNA (SSU), internal transcribed spacer (ITS), and 28S rRNA (LSU) markers for all eukaryotes.
+
+    #18s
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/QIIME2_EUK_SSU_v1.9.4.fasta --output-path /ref/eukaryome_18s_sequences.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/QIIME2_EUK_SSU_v1.9.4.tsv --output-path /ref/eukaryome_18s_taxonomy.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/eukaryome_18s_sequences.qza --i-reference-taxonomy /ref/eukaryome_18s_taxonomy.qza --o-classifier /ref/eukaryome_18s_classifier.qza'
+    
+    #ITS
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/QIIME2_EUK_ITS_v1.9.4.tsv --output-path /ref/eukaryome_ITS_taxonomy.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/QIIME2_EUK_ITS_v1.9.4.fasta --output-path /ref/eukaryome_ITS_sequences.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/eukaryome_ITS_sequences.qza --i-reference-taxonomy /ref/eukaryome_ITS_taxonomy.qza --o-classifier /ref/eukaryome_ITS_classifier.qza'
+    
+    #28s
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Taxonomy]' --input-path /ref/QIIME2_EUK_LSU_v1.9.4.tsv --output-path /ref/eukaryome_28s_taxonomy.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime tools import --type 'FeatureData[Sequence]' --input-path /ref/QIIME2_EUK_LSU_v1.9.4.fasta --output-path /ref/eukaryome_28s_sequences.qza'
+    docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/eukaryome_28s_sequences.qza --i-reference-taxonomy /ref/eukaryome_28s_taxonomy.qza --o-classifier /ref/eukaryome_28s_classifier.qza'
+    
+[Tedersoo L, Hosseyni Moghaddam M S, Mikryukov V, et al. EUKARYOME: the rRNA gene reference database for identification of all eukaryotes[J]. Database, 2024, 2024: baae043.](https://academic.oup.com/database/article/doi/10.1093/database/baae043/7691782)

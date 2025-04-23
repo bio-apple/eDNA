@@ -133,7 +133,7 @@ with open("primer.tsv", "w") as primer_tsv:
                          "TAAACTTCAGGGTGACCAAARAAYCA\t"
                          "313\n")
 
-    primer_tsv.write("BF2R2\t"
+    primer_tsv.write("CO1_BF2R2\t"
                          "ACWGGWTGRACWGTNTAYCC\t"
                          "TCDGGRTGNCCRAARAAYCA\t"
                          "421\n")

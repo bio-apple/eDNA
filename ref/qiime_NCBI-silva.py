@@ -33,7 +33,6 @@ def run(outdir,version):
                   f"qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/silva-{version}-ssu-nr99-seqs-derep-uniq.qza --i-reference-taxonomy /ref/silva-{version}-ssu-nr99-tax-derep-uniq.qza --o-classifier /ref/silva-{version}-ssu-nr99-classifier.qza\"")
     print(SILVA)
     subprocess.check_call(SILVA, shell=True)
-
     files = os.listdir(outdir)
     for file in files:
         if file not in ['ncbi-refseqs-classifier.qza',f'silva-{version}-ssu-nr99-classifier.qza']:
@@ -42,7 +41,6 @@ def run(outdir,version):
             if os.path.isfile(file_path):
                 os.remove(file_path)
                 print(f"Deleted {file}")
-    print(f"Build 16s_18s/12s/CO1/ITS Done!!!")
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()

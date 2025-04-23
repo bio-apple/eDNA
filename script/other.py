@@ -118,7 +118,7 @@ if args.type=="16s":
     refs.append(os.path.abspath(args.greengene2))
     db_name.append("greengene2")
     refs.append(os.path.abspath(args.rfish))
-    db_name.append("edna-fish-12S-16S-18S")
+    db_name.append("edna-fish-12S-18S-16S-CO1")
 
 if args.type=="18s":
     refs.append(os.path.abspath(args.silva))
@@ -126,23 +126,23 @@ if args.type=="18s":
     refs.append(os.path.abspath(args.refseq))
     db_name.append("refseq")
     refs.append(os.path.abspath(args.rfish))
-    db_name.append("edna-fish-12S-16S-18S")
+    db_name.append("edna-fish-12S-18S-16S-CO1")
 
 if args.type=="ITS":
     refs.append(os.path.abspath(args.ITS))
     db_name.append("ITS")
 
 if args.type=="CO1":
-    db_name.append("CO1")
+    db_name.append("midori2-coi")
     refs.append(os.path.abspath(args.CO1))
-    db_name.append("mitofish.COI")
+    db_name.append("edna-fish-12s-18s-16s-CO1")
     refs.append(os.path.abspath(args.cfish))
 
 if args.type=="12s":
-    db_name.append("12s")
+    db_name.append("midori2-12S")
     refs.append(os.path.abspath(args.s12))
 
-    db_name.append("edna-fish-12S-16S-18S")
+    db_name.append("edna-fish-12S-18S-16S-CO1")
     refs.append(os.path.abspath(args.rfish))
 
 if args.type=="rbcL":
