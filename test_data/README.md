@@ -48,14 +48,16 @@
 
 **NCBI SRA #PRJNA650007**
 
-    #primer:
+**primer**:
+
     rbcL2-F
         rbcL2 forward	5’-TGGCAGCATTYCGAGTAACTC-3’
-        Palmieri L, Bozza E, Giongo L. Soft fruit traceability in food matrices using real-time PCR[J]. Nutrients, 2009, 1(2): 316-328.
+[Palmieri L, Bozza E, Giongo L. Soft fruit traceability in food matrices using real-time PCR[J]. Nutrients, 2009, 1(2): 316-328.](https://www.mdpi.com/2072-6643/1/2/316)
+    
     rbcLa-R
         rbcL-a a_r CTTCTGCTACAAATAAGAATCGATCTC
-        Table S3 Primer sequences for test loci.
-        Kress W J, Erickson D L. A two-locus global DNA barcode for land plants: the coding rbcL gene complements the non-coding trnH-psbA spacer region[J]. PLoS one, 2007, 2(6): e508.
+
+[Kress W J, Erickson D L. A two-locus global DNA barcode for land plants: the coding rbcL gene complements the non-coding trnH-psbA spacer region[J]. PLoS one, 2007, 2(6): e508.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0000508)
     
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12374561
     sratoolkit.3.1.1-centos_linux64/bin/fastq-dump --split-3 SRR12374563
