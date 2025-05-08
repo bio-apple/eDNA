@@ -20,6 +20,6 @@ RUN /opt/conda/bin/conda install -n edna conda-forge::r-base bioconda::bioconduc
 FROM dada2 AS mothur
 RUN /opt/conda/bin/conda install -n edna --channel conda-forge --channel bioconda --channel defaults python numpy  \
     scikit-bio anaconda::pyqt ete3 duckdb XlsxWriter biopython mothur swarm fastqc rdp_classifier deblur \
-    fastp flash seqkit seqtk vsearch pear usearch pandaseq blast fasttree gblocks kraken2 krakentools krona bracken &&  \
+    fastp flash seqkit seqtk vsearch pear usearch pandaseq blast fasttree gblocks kraken2 krakentools krona bracken taxonkit &&  \
     git clone https://github.com/billzt/MiFish.git && cd MiFish && /opt/conda/envs/edna/bin/python3 setup.py develop && \
     /opt/conda/bin/conda clean -a -y
