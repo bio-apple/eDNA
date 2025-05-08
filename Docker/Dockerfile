@@ -8,7 +8,7 @@ RUN apk update && \
     wget -q -O /opt/Miniforge3-Linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
     bash /opt/Miniforge3-Linux-x86_64.sh -f -b -p /opt/conda/ && rm -rf /opt/Miniforge3-Linux-x86_64.sh /var/cache/apk/*
 FROM base AS qiime
-RUN  /opt/conda/bin/conda create -n edna --channel conda-forge --channel bioconda --channel defaults --channel qiime2 qiime2-amplicon  && /opt/conda/bin/conda clean -a -y
+RUN  /opt/conda/bin/conda create -n edna --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.4/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml
 
 FROM qiime AS dada2
 RUN /opt/conda/bin/conda install -n edna conda-forge::r-base bioconda::bioconductor-dada2 conda-forge::r-vegan conda-forge::r-ggplot2 conda-forge::r-dplyr  \
