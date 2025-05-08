@@ -51,8 +51,15 @@ The data flow diagram is as follows:
 
 ### step1:docker images
 
+local
+
     cd Docker/
     docker build -t edna ./
+
+or 
+
+    docker pull fanyucai1/edna:latest
+    docker tag fanyucai1/edna:latest edna:latest
 
 ### [step2:build database](./ref/README.md)
 
