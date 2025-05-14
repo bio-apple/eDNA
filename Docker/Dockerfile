@@ -11,6 +11,6 @@ RUN apk update && \
     /opt/conda/envs/edna/bin/pip3 install PyQt5==5.15.7 && \
     /opt/conda/bin/conda install -n edna --channel conda-forge --channel bioconda --channel defaults \
     bioconductor-aldex2 scikit-bio ete3 duckdb XlsxWriter mothur swarm fastqc rdp_classifier \
-    flash seqkit seqtk vsearch pear usearch pandaseq gblocks kraken2 krakentools krona bracken taxonkit && \
+    flash seqkit seqtk vsearch pear usearch pandaseq gblocks kraken2 krakentools krona bracken taxonkit bioawk && \
     git clone https://github.com/billzt/MiFish.git && cd MiFish && /opt/conda/envs/edna/bin/python3 setup.py develop && \
     /opt/conda/bin/conda clean -a -y
