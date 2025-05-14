@@ -85,3 +85,6 @@ EUKARYOME: is a community-curated research database for nuclear ribosomal 18S rR
     docker run -v /staging/fanyucai/eDNA/ref/:/ref edna sh -c 'export PATH=/opt/conda/envs/edna/bin:$PATH && qiime feature-classifier fit-classifier-naive-bayes --i-reference-reads /ref/eukaryome_28s_sequences.qza --i-reference-taxonomy /ref/eukaryome_28s_taxonomy.qza --o-classifier /ref/eukaryome_28s_classifier.qza'
     
 [Tedersoo L, Hosseyni Moghaddam M S, Mikryukov V, et al. EUKARYOME: the rRNA gene reference database for identification of all eukaryotes[J]. Database, 2024, 2024: baae043.](https://academic.oup.com/database/article/doi/10.1093/database/baae043/7691782)
+
+
+
