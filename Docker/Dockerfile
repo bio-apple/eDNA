@@ -7,6 +7,7 @@ RUN apk update && \
     rm glibc-2.35-r1.apk && ln -s /usr/glibc-compat/lib/* /lib64/ && \
     wget -q -O /opt/Miniforge3-Linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
     bash /opt/Miniforge3-Linux-x86_64.sh -f -b -p /opt/conda/ && rm -rf /opt/Miniforge3-Linux-x86_64.sh /var/cache/apk/* &&  \
+    curl -sSL https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets -o /opt/conda/bin/datasets && chmod +x /opt/conda/bin/datasets && \
     /opt/conda/bin/conda env create --name edna --file https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/2025.4/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml &&  \
     /opt/conda/envs/edna/bin/pip3 install PyQt5==5.15.7 && \
     /opt/conda/bin/conda install -n edna --channel conda-forge --channel bioconda --channel defaults \
