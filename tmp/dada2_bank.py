@@ -97,7 +97,7 @@ def run(R1,R2,prefix,outdir,ref,type,primer,name):
             f"taxa <- addSpecies(taxa, \"/ref/{test}\")\n"
             f"write.csv(taxa, file = \"/outdir/{prefix}.taxa.csv\",row.name=TRUE)\n"
             
-            #Track reads through the pipeline
+            #Track reads through the 4.pipeline
             f"getN <- function(x) sum(getUniques(x))\n"
             f"track <- cbind(out, getN(dadaFs), getN(dadaRs), getN(mergers), rowSums(seqtab.nochim))\n"
             f"colnames(track) <- c(\"input\", \"filtered\", \"denoisedF\", \"denoisedR\", \"merged\", \"nonchim\")\nrownames(track) <- \"{prefix}\"\n"

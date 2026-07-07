@@ -61,7 +61,7 @@ def run(indir,outdir,threshold,refseq=None,greengene2=None,silva=None):
             f"seqtab.nochim <- removeBimeraDenovo(seqtab, method=\"consensus\", multithread=TRUE, verbose=TRUE)\n"
             f"write.csv(t(seqtab.nochim), file = \"/outdir/all.seqtab.nochim.csv\")\n"
 
-            # Track reads through the pipeline
+            # Track reads through the 4.pipeline
             f"getN <- function(x) sum(getUniques(x))\n"
             f"track <- cbind(out, sapply(dadaFs, getN), sapply(dadaRs, getN), sapply(mergers, getN), rowSums(seqtab.nochim))\n"
             f"colnames(track) <- c(\"input\", \"filtered\", \"denoisedF\", \"denoisedR\", \"merged\", \"nonchim\")\n"
